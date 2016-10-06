@@ -1,7 +1,7 @@
 %----------------------------------------------------------------------------------------------------------------------------------------------------
 % INTRODUCTION
-\section{Standard Compliance}
-\IEEEPARstart{E}very PMU should be able to caluculate the value of phasor estimate accurately. The estimate will include positive sequence or single phase values, phase difference, freqnency and ROCOF. So it is importnat to keep in mind that the measurements are actually estimates of certain values.
+\section{C37.118 Standard Compliance}
+\IEEEPARstart{E}very PMU should be able to calculate the value of phasor estimate accurately. The estimate will include positive sequence or single phase values, phase difference, freqnency and ROCOF. So it is importnat to keep in mind that the measurements are actually estimates of certain values.
 
 Now, for a given input wave the computation for estimating the desired quantity are given below:
 For estimating frequency:
@@ -17,8 +17,18 @@ important thing to note here is that phasors are always computed in relation to 
 \subsection{Measurement Evaluation}
 To validate the estimation coming from PMUs they are compared with the theoretical results. As results consists of amplitude and phase difference both they are considered combinedly and this quantity is called \textit{total vector error} (TVE). TVE is an expression of difference between "perfect" sample of a theoretical synchrophasor and the estimate given by the unite at the same instant of time \cite{std:c37}. The value is normalized and expressed in PU of the theoretical phasor:
 \begin{equation}
-PVE(n) = \sqrt{\frac{\hat{X}_r(n) - \hat{X}_r(n)} {den}}
+PVE(n) = \sqrt{\frac{ (\hat{X}_r(n) - X_r(n))^2 + (\hat{X}_i(n)-X_i(n))^2} {X_r(n)^2 + X_i(n)^2}}
 \end{equation}
-to be complient with standard,PMU shall provide synchrophasor, frequency, and ROCOF measurements that meet the requirements as per the standards.
+Here $ \hat{X}_r (n)$ and $\hat{X}_i(n) $ are the estimated values of the given phasor and $X_r$ and $X_i$ are the theoretical values.
+to be complient with standard, PMU shall provide synchrophasor, frequency, and ROCOF measurements that meet the requirements as per the standards at a given time instance \textit{n}. Similarly for freq and ROCOF the validation will be done using following equations:
+\begin{eqnarray}
+FE == |f_{true}-f_{measured}| = |\Delta f_{true}-\Delta f_{measured}| \\
+RFE == |(df/dt)_{true}-(df/dt)_{measured} |
+\end{eqnarray}
 
 
+Apart from the above 3 quantitative parameters other three important parameters to be considered are measurement response time \& delay and reporting delay. \textit{Measurement response time} is the time to transition between two steady-state measurements before and after a step change is applied to the input. \textit{Measurement delay time} is defined as the time interval between the instant that a step change is applied to the input of a PMU and measurement time that the stepped parameter achieves a value that is halfway between the initial and final steady-state values \cite{std:c37}. The reason of measuring time delay is to verify that the time tagging has been compensatated properly or not.  \textit{Latency in reporting} is the time taken between the occurance of even in power system and that being reflacted in the output of the PMU. This parameter largely depends on the class of PMU and the sampling and filtering algorithem used. Which brings us to the classifiction of the PMU, they are divided in two parts:
+\begin{enumerate}
+\item \textbf{Protection Class (P class):} This PMU is used for protection purposes and hence its response time should be as much less as possible.
+\item \textbf{Measurement Class (M class):}  This PMU class emphasies on the accuracy of the reported data and hence timing requirement are not as stringint as P class PMUs.
+\end{enumerate} 
