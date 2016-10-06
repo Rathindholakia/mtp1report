@@ -1,0 +1,19 @@
+%----------------------------------------------------------------------------------------------------------------------------------------------------
+% INTRODUCTION
+\section{Introduction}
+\IEEEPARstart{D}ay by day power system is becoming more nad more complex, which makes it impossible to operate it without automation for higher reliability. Due to wider geographical distribution of the grid, timely detection of faults and taking preventive/corrective counter measure  has become a complex task, which requires a reliable, fast-acting and absolute techniqe to deal with the challenge. This is where the Phasor Measurements Unit (PMU) comes in to the picture. Phasor is a complex number which represents both magnitude and angle of an AC quantity. And the synchronized sampling/ measurement of this phasor at a precise reference (time) is called \textbf{synchrophasors} \cite{std:c37}. Using these synchrophasor measurements, different quantities are derived like phase angle, frequency, rate of change of frequency (ROCOF) etc. Frequency is computed as the first derivative of the synchrophasor phase angle, and ROCOF is computed as the second derivative of the same phase angle. 
+
+\subsection{Background Theory}
+Phasor representation of sinusoidal signals is commonly used in AC power system analysis. The sinusoidal waveform defined in Equation (1):
+
+\begin{equation}
+x(t) = X_m cos(\omega t + \varphi)
+\end{equation}
+is commonly represented as the phasor as shown in Equation (2):
+
+\begin{equation}
+\textbf{X} = \frac{Xm}{\sqrt{2}}\exp^{j\phi}
+or\hspace{2pt} \textbf{X} = X_r+jX_i
+\end{equation}
+
+The \textit{synchrophasor} representation of the signal $x(t)$ in Equation (1) is the value X in Equation (2) where $\varphi$ is the instantaneous phase angle relative to a cosine function at the nominal system frequency synchronized to UTC.
