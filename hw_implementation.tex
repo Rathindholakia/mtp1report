@@ -51,7 +51,27 @@ OMAP-L137 EVM is being used as the platform to design a PMU. OMAP-L137 EVM doesn
 
 \begin{figure}[ht]
 \includegraphics[width=\columnwidth]{fig/ADC_board.png}
-\label{fig:adc_board}
 \caption{ADC Board block diagram}
+\label{fig:adc_board}
 \end{figure}
-Above Fig:\ref{fig:adc_board}shows the design logic of ADC board. Two AD7864-1 are used as ADC chips due to their high sampling rate of 500 ksps and direct input voltage compatibality range of $\pm$ 10 V. AD7864 is a high speed 4 channel simultaneous sampalling successive approximation ADC with conversion time as low as $1.65 \mu sec$. its conversion sequence can be controlled through hardware as well as software, its default operating voltage is 5v but has a special output voltage shifter for interfacing it with 3.3v processors and controllers.
+Above Fig:\ref{fig:adc_board} shows the design logic of ADC board. Two AD7864-1 are used as ADC chips due to their high sampling rate of 500 ksps and direct input voltage compatibality range of $\pm$ 10 V. AD7864 is a high speed 4 channel simultaneous sampalling successive approximation ADC with conversion time as low as $1.65 \mu sec$. its conversion sequence can be controlled through hardware as well as software, its default operating voltage is 5v but has a special output voltage shifter for interfacing it with 3.3v processors and controllers. This ADCs are fairly advance hence they have been interfaced with a special asynchronus peripheral interfacing architecture called EMIF-A, which is exclusively available in OMAP-L13x series processors. Extended Memory InterFace (EMIF) has two parts A \& B out of which EMIF-B is having \textit{Enhanced Direct Memory Access} controller (EDMA3) which enables the processor for multi-threaded rapid memory access and hence it is exclusively for highspeed SDRAM interfacing where as interface \textit{A} (EMIF-A) is developed for generic purposes more details are given below:
+
+\subsubsection{EMIF-A}
+EMIF-A controller is a 16-bit databus based versetile controller, designed to interact with variety of devices like 
+\begin{itemize}
+\item Single Data Rate (SDR) RAM
+\item Asynchronous devices like NAND \& NOR flash memory and SRAM
+\end{itemize}
+It contains lot of features to ease and facilitate the usage of asynchronous devices. A functional block diagram is given here in Fig: \ref{fig:EMIFA} 
+\begin{figure}[ht]
+\includegraphics[width=\columnwidth]{fig/EMIFA.png}
+\caption{EMIFA Block Diagram}
+\label{fig:EMIFA}
+\end{figure}
+
+\subsubsection{ADC board Logic}
+Due to EMIFA, interfacing of ADC board became quiet convenient rather than using pins in GPIO mode. So the logical flow of the board is as follows:
+\begin{itemize}
+\item 6 input channels are required hence 2 ICs are used
+\item Chip Select (CS), Read, Write, and databits from 0 - 11 are directly available from the EMIFA interface, and they are shared with both the chips.
+\end{itemize}
