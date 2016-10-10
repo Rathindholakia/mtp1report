@@ -41,7 +41,7 @@ mini-FSS has 3 CPU cards, each having TI's MSP430 DSPs. This card is heart of th
 \end{itemize}
 
 \subsection{PMU}
-Omap-L137 EVM is being used as the platform to design a PMU. OMAP-L137 EVM doesnt have Analog to Digital Converter on board hence a interfacing circuit is developed. While designing the ADC board following criteria were kept considered.
+OMAP-L137 EVM is being used as the platform to design a PMU. OMAP-L137 EVM doesnt have Analog to Digital Converter on board hence a interfacing circuit is developed. While designing the ADC board following criteria were kept considered.
 \begin{itemize}
 \item Good sampling rate: ~200 Samples/Sec
 \item No of channels: 3 + 3 = 6 (3 - $\phi$ voltage and current) 
@@ -54,4 +54,4 @@ Omap-L137 EVM is being used as the platform to design a PMU. OMAP-L137 EVM doesn
 \label{fig:adc_board}
 \caption{ADC Board block diagram}
 \end{figure}
-Above Fig:\ref{fig:adc_board}shows the logic of ADC board. Two AD7864-1 are used
+Above Fig:\ref{fig:adc_board}shows the design logic of ADC board. Two AD7864-1 are used as ADC chips due to their high sampling rate of 500 ksps and direct input voltage compatibality range of $\pm$ 10 V. AD7864 has 4 SAR 
