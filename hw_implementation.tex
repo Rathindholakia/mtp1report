@@ -74,4 +74,12 @@ Due to EMIFA, interfacing of ADC board became quiet convenient rather than using
 \begin{itemize}
 \item 6 input channels are required hence 2 ICs are used
 \item Chip Select (CS), Read, Write, and databits from 0 - 11 are directly available from the EMIFA interface, and they are shared with both the chips.
+\item AD7864 has sequence selection which has been configured through hardware, and Clock source has been kept internal. because of this both the pins \texttt{INT/EXT\_CLK} \& \texttt{H/S select}
+\item AD7864 has 3 control output \texttt{Busy}, \texttt{FIRSTDATA} and \texttt{EOC}. Out of these only \texttt{busy} is observed via a data line (data bits 16 \& 15). Data is \textbf{and}ed is not read until data line 15 \& 14 are not zero.
+\item AD7864 supports two kinds of data reading 1) Reading during the conversion 2)Reading after the conversion. Here we are going to use \textit{Reading After the conversion}, below is the timing diagram of the chip for understanding the proper functioning of the circuit.
+\begin{figure}[h]
+\includegraphics[width = \columnwidth]{fig/adc_time_diag.png}
+\caption{ADC Reading After the Convversion timing}
+\label{fig:adc_timing}
+\end{figure}
 \end{itemize}
