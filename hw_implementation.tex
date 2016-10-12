@@ -57,7 +57,7 @@ OMAP-L137 EVM is being used as the platform to design a PMU. OMAP-L137 EVM doesn
 Above Fig:\ref{fig:adc_board} shows the design logic of ADC board. Two AD7864-1 are used as ADC chips due to their high sampling rate of 500 ksps and direct input voltage compatibality range of $\pm$ 10 V. AD7864 is a high speed 4 channel simultaneous sampalling successive approximation ADC with conversion time as low as $1.65 \mu sec$. its conversion sequence can be controlled through hardware as well as software, its default operating voltage is 5v but has a special output voltage shifter for interfacing it with 3.3v processors and controllers. This ADCs are fairly advance hence they have been interfaced with a special asynchronus peripheral interfacing architecture called EMIF-A, which is exclusively available in OMAP-L13x series processors. Extended Memory InterFace (EMIF) has two parts A \& B out of which EMIF-B is having \textit{Enhanced Direct Memory Access} controller (EDMA3) which enables the processor for multi-threaded rapid memory access and hence it is exclusively for highspeed SDRAM interfacing where as interface \textit{A} (EMIF-A) is developed for generic purposes more details are given below:
 
 \subsubsection{EMIF-A}
-EMIF-A controller is a 16-bit databus based versetile controller, designed to interact with variety of devices like 
+EMIF-A controller is a 16-bit databus based versetile controller \cite{uguide:emifa}, designed to interact with variety of devices like 
 \begin{itemize}
 \item Single Data Rate (SDR) RAM
 \item Asynchronous devices like NAND \& NOR flash memory and SRAM
@@ -66,7 +66,7 @@ It contains lot of features to ease and facilitate the usage of asynchronous dev
 It is apperent from figure-\ref{fig:EMIFA}, that it has 4 cheap selects and, one read and write and 16 data channels. which makes it very convenient for interfacing multiple peripherals at a time. 
 \begin{figure}[ht]
 \includegraphics[width=\columnwidth]{fig/EMIFA.png}
-\caption{EMIFA Block Diagram}
+\caption{EMIFA Block Diagram \cite{uguide:emifa} }
 \label{fig:EMIFA}
 \end{figure}
 
@@ -81,7 +81,7 @@ Due to EMIFA, interfacing of ADC board became quiet convenient rather than using
 \end{itemize}
 \begin{figure}[h]
 \includegraphics[width = \columnwidth]{fig/adc_time_diag.png}
-\caption{ADC Reading After the Convversion timing}
+\caption{ADC Reading After the Conversion timing }
 \label{fig:adc_timing}
 \end{figure}
 Now we will see the operation that takes place when sampling  is to be done:
@@ -91,3 +91,7 @@ Now we will see the operation that takes place when sampling  is to be done:
 \item Status of \texttt{BUSY}  will be checked via \texttt{DB15} \& \texttt{DB14} pins of the EMIFA header, for both the chips untill they are \texttt{low} again.
 \item The moment \texttt{BUSY} goes low, \texttt{EMA\_CS[2]} and \texttt{EMA\_A\_RE} are asserted with which AD7864 starts puting data on data lines. this processes of asserting is reapeated for 4 times, for each channel. The same is done using \texttt{EMA\_CS[3]} for getting data from 2nd ADC chip.
 \end{itemize}
+
+\subsubsection{Computer}
+It will have the Phasor Data Concentrator (PDC) program, which will collate the data coming from our PMU coming over serial bus. PDC  usually has two functions one is to archive the data for historic reference and to send the data upward to higher level PDC for control actions and analytics. Here a PDC program developed by other M.Tech students is going to be used which is called \textbf{iPDC} \cite{site:ipdc}. iPDC has two parts, one part controlles the data sources and the communication of configuration frame. The other part \texttt{DBserver} works as a data storage manager, which archives the data received at an given port. Configuration frame is first communicated before starting the transmission of data to know the number of channels, digital status word etc.
+Though for existing setup config frame wont be required so program can be modified accordingly to function without it.
