@@ -61,8 +61,10 @@ It is called SIC, it acts as a communication layer between host PC and the CPUs 
 \end{figure}
 
 \item \textbf{CPU card:} 
-mini-FSS has 3 CPU cards, each having TI's MSP430 DSPs. This card is heart of the FSS. They handle all the mathematical algorithm associated with the simulation. Data flowing from and to the cards are controled by IRC card via \textbf{back plane} PCB.
+mini-FSS has 3 CPU cards, each having TI's MSP430 DSPs. These cards are heart of FSS. They handle all the mathematical algorithm associated with the simulation. Data flowing from and to the cards are controled by IRC card via \textbf{back plane} PCB.
 \end{itemize}
+
+FSS having card base architecture with multiple CPU makes it a very viable platform for modeling purposes, as the system can be split across multiple process threads and concurrent execution can be done. This feature makes it extremely suitable for Power system and power electronics application as there different system cutset can be made to execute on each processor and hence results can be computed/ solved very fast. This feature is explored for the PMU testing as the system model is implemented over several cores/processors.  
 
 \subsection{PMU}
 OMAP-L137 EVM is being used as the platform to design PMU. OMAP-L137 EVM doesnt have Analog to Digital Converter on board hence an interfacing circuit is developed. While designing the ADC board following criteria were kept considered.
