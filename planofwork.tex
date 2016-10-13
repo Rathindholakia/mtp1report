@@ -1,8 +1,24 @@
+
 \section{Work Done and Plan of work}
 \subsection*{Work Done}
-\begin{figure}[b]
-\includegraphics[width=\textwidth]{fig/cdac_pmu.jpg}
-\end{figure}
+
+
 \begin{itemize}
-\item Initially the idea was to use an indegenously developed PMU in collaboration with C-DAC, Trivendrum and IIT Bombay. This PMU is a full functional device having capability of measuring six Voltage vectors and 6 Current vectors of all phases upto the voltage level upto 230 v has all the n
+\item Initially the idea was to use an indegenously developed PMU in collaboration with C-DAC, Trivendrum and IIT Bombay. This PMU is a full functional device having capability of measuring six Voltage vectors and 6 Current vectors. It was having a signal conditioning stange (sensor module) which enabled the PMU to sense signals upto the voltage of 230 v. The device is show in the Fig-\ref{fig:cdac_pmu}. It sampling circuit uses AD7606. The PMU has 8-channel, of 16-bits with bi-polar inputs at sampling rate of 200 ksps. So to use the hardware so that development time can be reduced the functioning and usage was understood and efforts were made to make it functional but after efforts of more then 1 month we discontinued it and decided to develop our own device
+
+\item ALong with the above work related to hardware, study of IEEE C37.118-2011/14 standards along with literature survey was also done over the period of 3 months. During the literature survey different papers on Dynamic testing of PMU, test-beds for PMU, smart-grid test-bed topics were explored to get better insight of the "How-to" and "challenges" of the implementation of the experiment.
+
+\item AD7864 was chosen as an ADC chip and designing of ADC interfacing board was started. After rigorous study of OMAP-L137 EVM, EMIFA, AD7864 and schematics of C-DAC PMU, A proper stretagy was laid down and logic was dveloped as explained in \textit{implementation} section.   
+\end{itemize}
+
+%================ Plan of work ===============
+\subsection*{Future Plan of work}
+In upcoming months following activities are planned for the accomplishment of the experiment
+\begin{itemize}
+\item Test ADC board, check its performance after connecting it with OMAP-L137 EVM ( 15 Days )
+\item Interfacing of GPS module and DSP prigramming for time based signal sampling ( 15 - 20 Days )
+\item Implement and test DFT algorithm for the phasor estimation and reconstruction (~1.5 months )
+\item Testing of whole setup along with simple test input from FSS ( 5 - 7 Day)
+\item Test PMU setup using FSS as real time player and analyse the result
+\item Implement a test system in FSS using multi-cores and do the testing (mentioned in complaince section) and analysis (2 - 3 months)
 \end{itemize}
