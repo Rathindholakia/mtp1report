@@ -8,6 +8,12 @@ Overview of the test setup can be seen in FIGURE, Implementation can be divided 
 \end{enumerate}
 During the initial phase of the project intention was to use indegenously PMU developed C-DAC but due to the hardware issues and lack of documentation and support, it was decided that a minimalistic PMU will be developed by ourself.
 
+\begin{figure}[t]
+\includegraphics[width=\columnwidth]{fig/FSS_setup.jpg}
+\caption{Mini-FSS setup in laboratory}
+\label{fig:fss_setup}
+\end{figure}
+
 \subsection{Full Spectrum Simulator:}
 As per the requirement of the implementation, miniature-Full spectrum Simulator will be used for this purpose. FSS is a card based, multi CPU - parallel processing hardware.It uses TI's MSP430 DSPs as building block. It was developed by IIT Bombay and CDAC for both, offline \& real-time  simulation purposes in Power Electronics and Power Systems.
 
@@ -18,6 +24,9 @@ As per the requirement of the implementation, miniature-Full spectrum Simulator 
 \label{fig:fss_arch}
 \end{figure}
 As shown in \ref{fig:fss_arch} above it is a card base setup which contains:
+
+
+
 \begin{itemize}
 \item[-] System Interface Card (SIC)
 \item[-] Intra Rack Control Card (IRC Card)
@@ -27,7 +36,6 @@ As shown in \ref{fig:fss_arch} above it is a card base setup which contains:
 \item[-] One Digital Input/Output Card (DIO Card), having 24 digital inputs and 24 digital outputs (0 - 5 V).
 \item[-] One Back Plane PCB.
 \end{itemize}
-
 
 \begin{itemize}
 \item \textbf{System Interface Card:} 
