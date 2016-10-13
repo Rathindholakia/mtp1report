@@ -38,13 +38,29 @@ As shown in Fig: \ref{fig:fss_arch} above it is a card base setup which contains
 \end{itemize}
 
 \begin{itemize}
-\item \textbf{System Interface Card:} 
+\begin{figure}
+\includegraphics[width=\columnwidth]{fig/SIC_arch.png}
+\caption{SIC block Diagram}
+\label{fig:SIC}
+\end{figure}
 
-It is called SiC, it acts as a communication layer between host PC and the device. It consists of TUSB chip which connects it to the host PC, a TMS320 to interface SIC with IRC card and a MSP430 to have RS-232 interfacing.
-\item \textbf{IRC Card:} IRC is designed as a master control, which eventually control other cards, peripheral communication, timer triggered execution and host pc communication. Further more IRC card handles analog as well as digital input-output also. Apart from that IRC processor also controls the simulation execution using it's timer on the respective CPU card. IRC card has protocal implemented to communicate between CPU cards and SIC so that simulation can be controlled and it's result can be sent to respective peripheral and/or can be downloaded to host PC.
+\item \textbf{System Interface Card:} 
+It is called SIC, it acts as a communication layer between host PC and the CPUs in the CPU rack. It consists of TUSB chip which connects the device to host PC, real-time simulation software is downloaded to from the host computer to SIC over this USB interface for distribution over different CPUs. It communicates to other CPUs in the rack over backplane through Gun Transistor Logic Plus (GTLP) transceivers. A TMS320 chip is also there to interface SIC with IRC card and a MSP430 to have RS-232 interfacing.
+\begin{figure}[ht]
+\includegraphics[width=\columnwidth]{fig/iirc_arch.png}
+\caption{IIRC card Block Diagram}
+\label{fig:IIRC}
+\end{figure}
+
+\item \textbf{Inter Intra Rack Communication Card:} IIRC is designed as a master controller card, which controlls other cards, peripheral communication, timer triggered execution and host pc communication. Further more IIRC card handles analog as well as digital input-output also. Apart from that IIRC processor also controls the simulation execution using it's timer on the respective CPU card. IIRC card has protocal implemented to communicate between CPU cards and SIC so that simulation can be controlled and it's result can be sent to respective peripheral and/or can be downloaded to host PC.The communication to and from the I/O system over a high speed fiber optic network is also controlled by the IIRC cards using 2 Altera make FPGAs.
+
+\begin{figure}[ht]
+\includegraphics*[width=\columnwidth]{fig/cpu_card_arch.png}
+\caption{CPU card Block Diagram}
+\label{fig:cpu}
+\end{figure}
 
 \item \textbf{CPU card:} 
-
 mini-FSS has 3 CPU cards, each having TI's MSP430 DSPs. This card is heart of the FSS. They handle all the mathematical algorithm associated with the simulation. Data flowing from and to the cards are controled by IRC card via \textbf{back plane} PCB.
 \end{itemize}
 
