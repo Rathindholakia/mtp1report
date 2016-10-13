@@ -15,7 +15,7 @@ During the initial phase of the project intention was to use indegenously PMU de
 \end{figure}
 
 \subsection{Full Spectrum Simulator:}
-As per the requirement of the implementation, miniature-Full spectrum Simulator will be used for this purpose. FSS is a card based, multi CPU - parallel processing hardware.It uses TI's MSP430 DSPs as building block. It was developed by IIT Bombay and CDAC for both, offline \& real-time  simulation purposes in Power Electronics and Power Systems.
+As per the requirement of the implementation, miniature-Full spectrum Simulator will be used for this purpose. FSS is a card based, multi CPU - parallel processing hardware. It uses TI's MSP430 DSPs as building block. It was developed by IIT Bombay and CDAC for both, offline \& real-time  simulation purposes in Power Electronics and Power Systems.
 
 \begin{figure}[th]
 \centering
@@ -23,7 +23,7 @@ As per the requirement of the implementation, miniature-Full spectrum Simulator 
 \caption{FSS architecture}
 \label{fig:fss_arch}
 \end{figure}
-As shown in \ref{fig:fss_arch} above it is a card base setup which contains:
+As shown in Fig: \ref{fig:fss_arch} above it is a card base setup which contains:
 
 
 
@@ -40,7 +40,7 @@ As shown in \ref{fig:fss_arch} above it is a card base setup which contains:
 \begin{itemize}
 \item \textbf{System Interface Card:} 
 
-It is called SiC, its acts as a communication layer between host PC and the device. Its consists of TUSB chip which connects it to the host PC, a TMS320 to interface SIC with IRC card and a MSP430 to have RS-232 interfacing.
+It is called SiC, it acts as a communication layer between host PC and the device. It consists of TUSB chip which connects it to the host PC, a TMS320 to interface SIC with IRC card and a MSP430 to have RS-232 interfacing.
 \item \textbf{IRC Card:} IRC is designed as a master control, which eventually control other cards, peripheral communication, timer triggered execution and host pc communication. Further more IRC card handles analog as well as digital input-output also. Apart from that IRC processor also controls the simulation execution using it's timer on the respective CPU card. IRC card has protocal implemented to communicate between CPU cards and SIC so that simulation can be controlled and it's result can be sent to respective peripheral and/or can be downloaded to host PC.
 
 \item \textbf{CPU card:} 
@@ -49,12 +49,12 @@ mini-FSS has 3 CPU cards, each having TI's MSP430 DSPs. This card is heart of th
 \end{itemize}
 
 \subsection{PMU}
-OMAP-L137 EVM is being used as the platform to design a PMU. OMAP-L137 EVM doesnt have Analog to Digital Converter on board hence a interfacing circuit is developed. While designing the ADC board following criteria were kept considered.
+OMAP-L137 EVM is being used as the platform to design PMU. OMAP-L137 EVM doesnt have Analog to Digital Converter on board hence an interfacing circuit is developed. While designing the ADC board following criteria were kept considered.
 \begin{itemize}
 \item Good sampling rate: ~200 Samples/Sec
 \item No of channels: 3 + 3 = 6 (3 - $\phi$ voltage and current) 
 \item Interfacing type: It should be memory addressable and voltage level compatible  to the EVM.
-\item Input type: FSS analog output is differential which can be configured as single. their voltage level is $\pm$10V
+\item Input type: FSS analog output is differential which can be configured as single ended, its voltage level is $\pm$10V
 \end{itemize}
 
 \begin{figure}[ht]
@@ -62,7 +62,7 @@ OMAP-L137 EVM is being used as the platform to design a PMU. OMAP-L137 EVM doesn
 \caption{ADC Board block diagram}
 \label{fig:adc_board}
 \end{figure}
-Above Fig:\ref{fig:adc_board} shows the design logic of ADC board. Two AD7864-1 are used as ADC chips due to their high sampling rate of 500 ksps and direct input voltage compatibality range of $\pm$ 10 V. AD7864 is a high speed 4 channel simultaneous sampalling successive approximation ADC with conversion time as low as $1.65 \mu sec$. its conversion sequence can be controlled through hardware as well as software, its default operating voltage is 5v but has a special output voltage shifter for interfacing it with 3.3v processors and controllers. This ADCs are fairly advance hence they have been interfaced with a special asynchronus peripheral interfacing architecture called EMIF-A, which is exclusively available in OMAP-L13x series processors. Extended Memory InterFace (EMIF) has two parts A \& B out of which EMIF-B is having \textit{Enhanced Direct Memory Access} controller (EDMA3) which enables the processor for multi-threaded rapid memory access and hence it is exclusively for highspeed SDRAM interfacing where as interface \textit{A} (EMIF-A) is developed for generic purposes more details are given below:
+Above Fig: \ref{fig:adc_board} shows the design logic of ADC board. Two AD7864-1 are used as ADC chips due to their high sampling rate of 500 ksps and direct input voltage compatibality range of $\pm$ 10 V. AD7864 is a high speed 4 channel simultaneous sampalling successive approximation ADC with conversion time as low as $1.65 \mu sec$. Chip's conversion sequence can be controlled through hardware as well as software, its default operating voltage is 5v but has a special output voltage shifter for interfacing it with 3.3v processors and controllers. This ADCs are fairly advance hence they have been interfaced with a special asynchronus peripheral interfacing architecture called EMIF-A, which is exclusively available in OMAP-L13x series processors. Extended Memory InterFace (EMIF) has two parts A \& B out of which EMIF-B is having \textit{Enhanced Direct Memory Access} controller (EDMA3) which enables the processor for multi-threaded rapid memory access and hence it is exclusively for highspeed SDRAM interfacing where as interface \textit{A} (EMIF-A) is developed for generic purposes more details are given below:
 
 \subsubsection{EMIF-A}
 EMIF-A controller is a 16-bit databus based versetile controller \cite{uguide:emifa}, designed to interact with variety of devices like 
