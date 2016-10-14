@@ -1,6 +1,6 @@
 %-------------- Hardware Description ------------------ %
 \section{Implementation}
-Overview of the test setup can be seen in Fig- \ref{fig:fss_setup}, implementation can be divided in three parts
+Overview of the test setup can be seen in Fig.\ref{fig:fss_setup}, implementation can be divided in three parts
 \begin{enumerate}
 \item \textbf{Full Spectrum Simulator (FSS):} Which will have the power system model, through which different test conditions will be given
 \item \textbf{PMU:} Which will consist of a ADC interfacing board and OMAP-L 137 EVM
@@ -16,15 +16,15 @@ During the initial phase of the project, intention was to use indigenously PMU d
 \end{figure*}
 
 \subsection{Full Spectrum Simulator:}
-As per the requirement of the implementation, miniature-Full spectrum Simulator will be used for this purpose. FSS is a card based, multi CPU - parallel processing hardware. It uses TI's MSP430 DSPs as building block. It was developed by IIT Bombay and CDAC for both, offline \& real-time  simulation purposes in Power Electronics and Power Systems.
+As per the requirement of the implementation, miniature-Full Spectrum Simulator will be used for this purpose. FSS is a card based, multi CPU - parallel processing hardware. It uses TI's VC33 DSPs as building block. It was developed by IIT Bombay, IISC Banglore and CDAC, Thiruvananthapuram for both, offline \& real-time  simulation purposes in Power Electronics and Power Systems.
 
 \begin{figure}[th]
 \centering
 \includegraphics[width=250pt]{fig/fss_arch2.png}
-\caption{FSS architecture}
+\caption{FSS architecture\cite{Paper:fssmanual}}
 \label{fig:fss_arch}
 \end{figure}
-As shown in Fig: \ref{fig:fss_arch} above it is a card base setup which contains:
+As shown in Fig.\ref{fig:fss_arch} above it is a card based setup which contains:
 
 
 
@@ -41,7 +41,7 @@ As shown in Fig: \ref{fig:fss_arch} above it is a card base setup which contains
 \begin{itemize}
 \begin{figure}
 \includegraphics[width=\columnwidth]{fig/SIC_arch.png}
-\caption{SIC block Diagram}
+\caption{SIC block Diagram \cite{Paper:fssmanual}}
 \label{fig:SIC}
 \end{figure}
 
@@ -49,7 +49,7 @@ As shown in Fig: \ref{fig:fss_arch} above it is a card base setup which contains
 It is called SIC, it acts as a communication layer between host PC and the CPUs in the CPU rack. It consists of TUSB chip which connects the device to host PC, real-time simulation software is downloaded to from the host computer to SIC over this USB interface for distribution over different CPUs. It communicates to other CPUs in the rack over backplane through Gun Transistor Logic Plus (GTLP) transceivers. A TMS320 chip is also there to interface SIC with IRC card and a MSP430 to have RS-232 interfacing.
 \begin{figure}[ht]
 \includegraphics[width=\columnwidth]{fig/iirc_arch.png}
-\caption{IIRC card Block Diagram}
+\caption{IIRC card Block Diagram \cite{Paper:fssmanual}}
 \label{fig:IIRC}
 \end{figure}
 
@@ -57,7 +57,7 @@ It is called SIC, it acts as a communication layer between host PC and the CPUs 
 
 \begin{figure}[ht]
 \includegraphics*[width=\columnwidth]{fig/cpu_card_arch.png}
-\caption{CPU card Block Diagram}
+\caption{CPU card Block Diagram \cite{Paper:fssmanual}}
 \label{fig:cpu}
 \end{figure}
 
@@ -65,7 +65,7 @@ It is called SIC, it acts as a communication layer between host PC and the CPUs 
 mini-FSS has 3 CPU cards, each having TI's MSP430 DSPs. These cards are heart of FSS. They handle all the mathematical algorithm associated with the simulation. Data flowing from and to the cards are controlled by IRC card via \textbf{back plane} PCB.
 \end{itemize}
 
-FSS having card base architecture with multiple CPU makes it a very viable platform for modeling purposes, as the system can be split across multiple process threads and concurrent execution can be done. This feature makes it extremely suitable for Power system and power electronics application as there different system cutset can be made to execute on each processor and hence results can be computed/ solved very fast. This feature is explored for the PMU testing as the system model is implemented over several cores/processors.
+FSS having card based architecture with multiple CPU makes it a very viable platform for modeling purposes, as the system can be split across multiple process threads and concurrent execution can be done. This feature makes it extremely suitable for Power system and power electronics application as there different system cutset can be made to execute on each processor and hence results can be computed/ solved very fast. This feature is explored for the PMU testing as the system model is implemented over several cores/processors.
 
 For our purposes in the beginning FSS will be used a real-time player only. A simulation will be developed in a Elector Magnetic Transient Program (EMTP) for a sample system, and it's data will be taken. This data will be used to create a output pattern to be played in real-time to the PMU. Latern on as the concept evolves A model of a small system (say 4 bus or more) will be implemented which will use multiple CPU cards and processors, which will used as an input to the PMU. Different kinds of transient conditions can be created using this, which can be later used for testing of the PMU.
 
@@ -85,7 +85,7 @@ OMAP-L137 EVM is being used as the platform to design PMU. OMAP-L137 EVM doesnt 
 \caption{ADC Board block diagram}
 \label{fig:adc_board}
 \end{figure}
-Above Fig: \ref{fig:adc_board} shows the design logic of ADC board. Two AD7864-1 are used as ADC chips due to their high sampling rate of 500 ksps and direct input voltage compatibility range of $\pm$ 10 V. AD7864 is a high speed 4 channel simultaneous sampalling successive approximation ADC with \textit{bi-polar input} having conversion time as low as $1.65 \mu sec$. Chip's conversion sequence can be controlled through hardware as well as software, its default operating voltage is 5v but has a special output voltage shifter for interfacing it with 3.3v processors and controllers. This ADCs are fairly advance hence they have been interfaced with a special asynchronous peripheral interfacing architecture called EMIF-A, which is exclusively available in OMAP-L13x series processors. Extended Memory InterFace (EMIF) has two parts A \& B out of which EMIF-B is having \textit{Enhanced Direct Memory Access} controller (EDMA3) which enables the processor for multi-threaded rapid memory access and hence it is exclusively for highspeed SDRAM interfacing where as interface \textit{A} (EMIF-A) is developed for generic purposes more details are given below:
+Above Fig.\ref{fig:adc_board} shows the design logic of ADC board. Two AD7864-1 are used as ADC chips due to their high sampling rate of 500 ksps and direct input voltage compatibility range of $\pm$ 10 V. AD7864 is a high speed 4 channel simultaneous sampalling successive approximation ADC with \textit{bi-polar input} having conversion time as low as $1.65 \mu sec$. Chip's conversion sequence can be controlled through hardware as well as software, its default operating voltage is 5v but has a special output voltage shifter for interfacing it with 3.3v processors and controllers. This ADCs are fairly advance hence they have been interfaced with a special asynchronous peripheral interfacing architecture called EMIF-A, which is exclusively available in OMAP-L13x series processors. Extended Memory InterFace (EMIF) has two parts A \& B out of which EMIF-B is having \textit{Enhanced Direct Memory Access} controller (EDMA3) which enables the processor for multi-threaded rapid memory access and hence it is exclusively for highspeed SDRAM interfacing where as interface \textit{A} (EMIF-A) is developed for generic purposes more details are given below:
 
 \subsubsection{EMIF-A}
 EMIF-A controller is a 16-bit databus based versatile controller \cite{uguide:emifa}, designed to interact with variety of devices like 
@@ -93,8 +93,8 @@ EMIF-A controller is a 16-bit databus based versatile controller \cite{uguide:em
 \item Single Data Rate (SDR) RAM
 \item Asynchronous devices like NAND \& NOR flash memory and SRAM
 \end{itemize}
-It contains lot of features to ease and facilitate the usage of asynchronous devices. A functional block diagram is given here in Fig: \ref{fig:EMIFA} 
-It is apperent from figure-\ref{fig:EMIFA}, that it has 4 cheap selects and, one read and write and 16 data channels. which makes it very convenient for interfacing multiple peripherals at a time. 
+It contains lot of features to ease and facilitate the usage of asynchronous devices. A functional block diagram is given here in Fig.\ref{fig:EMIFA} 
+It is apperent from Fig.\ref{fig:EMIFA}, that it has 4 cheap selects and, one read and write and 16 data channels. which makes it very convenient for interfacing multiple peripherals at a time. 
 \begin{figure}[ht]
 \includegraphics[width=\columnwidth]{fig/EMIFA.png}
 \caption{EMIFA Block Diagram \cite{uguide:emifa} }
@@ -113,7 +113,7 @@ Due to EMIFA, interfacing of ADC board became quiet convenient rather than using
 \end{itemize}
 \begin{figure}[h]
 \includegraphics[width = \columnwidth]{fig/adc_time_diag.png}
-\caption{ADC Reading After the Conversion timing }
+\caption{ADC Reading After the Conversion timing \cite{uguide:adc}}
 \label{fig:adc_timing}
 \end{figure}
 Now we will see the operation that takes place when sampling  is to be done:
@@ -138,6 +138,6 @@ Though for existing setup config frame wont be required so program can be modifi
 
 \begin{figure*}[t]
 \includegraphics[width=\textwidth]{fig/cdac_pmu.jpg}
-\caption{C-DAC, trivendrum PMU}
+\caption{CDAC, Thiruvananthapuram PMU}
 \label{fig:cdac_pmu}
 \end{figure*}

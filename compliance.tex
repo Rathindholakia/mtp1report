@@ -17,7 +17,7 @@ important thing to note here is that phasors are always computed in relation to 
 \subsection{Measurement Evaluation}
 To validate the estimation coming from PMUs they are compared with the theoretical results. As results consists of amplitude and phase difference both they are considered combinedly and this quantity is called \textit{total vector error} (TVE). TVE is an expression of difference between ``perfect" sample of a theoretical synchrophasor and the estimate given by the unite at the same instant of time \cite{std:c37}. The value is normalized and expressed in PU of the theoretical phasor:
 \begin{equation}
-PVE(n) = \sqrt{\frac{ (\hat{X}_r(n) - X_r(n))^2 + (\hat{X}_i(n)-X_i(n))^2} {X_r(n)^2 + X_i(n)^2}}
+TVE(n) = \sqrt{\frac{ (\hat{X}_r(n) - X_r(n))^2 + (\hat{X}_i(n)-X_i(n))^2} {X_r(n)^2 + X_i(n)^2}}
 \end{equation}
 Here $ \hat{X}_r (n)$ and $\hat{X}_i(n) $ are the estimated values of the given phasor and $X_r$ and $X_i$ are the theoretical values.
 To be complient with standard, PMU shall provide synchrophasor, frequency, and ROCOF measurements that meet the requirements as per the standards at a given time instance \textit{n}. Similarly for freq and ROCOF the validation will be done using following equations:
