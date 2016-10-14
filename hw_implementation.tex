@@ -1,12 +1,12 @@
 %-------------- Hardware Description ------------------ %
 \section{Implementation}
-Overview of the test setup can be seen in FIGURE, Implementation can be divided in three parts
+Overview of the test setup can be seen in Fig- \ref{fig:fss_setup}, implementation can be divided in three parts
 \begin{enumerate}
 \item \textbf{Full Spectrum Simulator (FSS):} Which will have the power system model, through which different test conditions will be given
 \item \textbf{PMU:} Which will consist of a ADC interfacing board and OMAP-L 137 EVM
 \item \textbf{PC:} It will have a Phasor Data Concentrator (PDC), which receives data from the PMU and record it for future analysis.
 \end{enumerate}
-During the initial phase of the project intention was to use indigenously PMU developed C-DAC but due to the hardware issues and lack of documentation and support, it was decided that a minimalistic PMU will be developed by ourself.
+During the initial phase of the project, intention was to use indigenously PMU developed C-DAC but due to the hardware issues and lack of documentation and support, it was decided that a minimalistic PMU will be developed by ourself. Now we will see detailed description of each devices: 
 
 \begin{figure*}[th]
 \centering
@@ -124,6 +124,13 @@ Now we will see the operation that takes place when sampling  is to be done:
 \item The moment \texttt{BUSY} goes low, \texttt{EMA\_CS[2]} and \texttt{EMA\_A\_RE} are asserted with which AD7864 starts putting data on data lines. this processes of asserting is repeated for 4 times, for each channel. The same is done using \texttt{EMA\_CS[3]} for getting data from 2nd ADC chip.
 \end{itemize}
 
+Apart from ADC board another important component in PMU is GPS signal. A NavSynch CW-12TIM GPS receiver is will be interfaced. The receiver provides three type of output signal.
+\begin{itemize}
+\item 1PPS - Synchronized with the start of the UTC second
+\item 10MHz FOUT - The maximum time interval error (MTIE) of this signal is 4us at the interval of 446.8 Ks.
+\item UART - Data communication port for UTC data and other control/status information
+\end{itemize}
+The receiver has an on board RTC which maintains the time information in loss of satellite fix. Now we will see description of computer interface.
 
 \subsubsection{Computer}
 It will have the Phasor Data Concentrator (PDC) program, which will collate the data coming from our PMU coming over serial bus. PDC  usually has two functions one is to archive the data for historic reference and to send the data upward to higher level PDC for control actions and analytics. Here a PDC program developed by other M.Tech students is going to be used which is called \textbf{iPDC} \cite{site:ipdc}. iPDC has two parts, one part controls the data sources and the communication of configuration frame. The other part \texttt{DBserver} works as a data storage manager, which archives the data received at an given port. Configuration frame is first communicated before starting the transmission of data to know the number of channels, digital status word etc.
