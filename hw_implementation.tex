@@ -6,7 +6,7 @@ Overview of the test setup can be seen in FIGURE, Implementation can be divided 
 \item \textbf{PMU:} Which will consist of a ADC interfacing board and OMAP-L 137 EVM
 \item \textbf{PC:} It will have a Phasor Data Concentrator (PDC), which receives data from the PMU and record it for future analysis.
 \end{enumerate}
-During the initial phase of the project intention was to use indegenously PMU developed C-DAC but due to the hardware issues and lack of documentation and support, it was decided that a minimalistic PMU will be developed by ourself.
+During the initial phase of the project intention was to use indigenously PMU developed C-DAC but due to the hardware issues and lack of documentation and support, it was decided that a minimalistic PMU will be developed by ourself.
 
 \begin{figure*}[th]
 \centering
@@ -53,7 +53,7 @@ It is called SIC, it acts as a communication layer between host PC and the CPUs 
 \label{fig:IIRC}
 \end{figure}
 
-\item \textbf{Inter Intra Rack Communication Card:} IIRC is designed as a master controller card, which controlls other cards, peripheral communication, timer triggered execution and host pc communication. Further more IIRC card handles analog as well as digital input-output also. Apart from that IIRC processor also controls the simulation execution using it's timer on the respective CPU card. IIRC card has protocal implemented to communicate between CPU cards and SIC so that simulation can be controlled and it's result can be sent to respective peripheral and/or can be downloaded to host PC.The communication to and from the I/O system over a high speed fiber optic network is also controlled by the IIRC cards using 2 Altera make FPGAs.
+\item \textbf{Inter Intra Rack Communication Card:} IIRC is designed as a master controller card, which controls other cards, peripheral communication, timer triggered execution and host pc communication. Further more IIRC card handles analog as well as digital input-output also. Apart from that IIRC processor also controls the simulation execution using it's timer on the respective CPU card. IIRC card has protocol implemented to communicate between CPU cards and SIC so that simulation can be controlled and it's result can be sent to respective peripheral and/or can be downloaded to host PC.The communication to and from the I/O system over a high speed fiber optic network is also controlled by the IIRC cards using 2 Altera make FPGAs.
 
 \begin{figure}[ht]
 \includegraphics*[width=\columnwidth]{fig/cpu_card_arch.png}
@@ -62,12 +62,12 @@ It is called SIC, it acts as a communication layer between host PC and the CPUs 
 \end{figure}
 
 \item \textbf{CPU card:} 
-mini-FSS has 3 CPU cards, each having TI's MSP430 DSPs. These cards are heart of FSS. They handle all the mathematical algorithm associated with the simulation. Data flowing from and to the cards are controled by IRC card via \textbf{back plane} PCB.
+mini-FSS has 3 CPU cards, each having TI's MSP430 DSPs. These cards are heart of FSS. They handle all the mathematical algorithm associated with the simulation. Data flowing from and to the cards are controlled by IRC card via \textbf{back plane} PCB.
 \end{itemize}
 
 FSS having card base architecture with multiple CPU makes it a very viable platform for modeling purposes, as the system can be split across multiple process threads and concurrent execution can be done. This feature makes it extremely suitable for Power system and power electronics application as there different system cutset can be made to execute on each processor and hence results can be computed/ solved very fast. This feature is explored for the PMU testing as the system model is implemented over several cores/processors.
 
-For our purposes in the begining FSS will be used a real-time player only. A simulation will be developed in a Elector Magnetic Transient Program (EMTP) for a sample system, and it's data will be taken. This data will be used to create a output pattern to be played in real-time to the PMU. Latern on as the concept evolves A model of a small system (say 4 bus or more) will be implemented which will use multiple CPU cards and processors, which will used as an input to the PMU. Different kinds of transient conditions can be created using this, which can be later used for testing of the PMU.
+For our purposes in the beginning FSS will be used a real-time player only. A simulation will be developed in a Elector Magnetic Transient Program (EMTP) for a sample system, and it's data will be taken. This data will be used to create a output pattern to be played in real-time to the PMU. Latern on as the concept evolves A model of a small system (say 4 bus or more) will be implemented which will use multiple CPU cards and processors, which will used as an input to the PMU. Different kinds of transient conditions can be created using this, which can be later used for testing of the PMU.
 
 Though as of now it has been observed that simulation having anything more than 2 bus is not possible to run due to step size and other technical aspects. But later on a more thorough effort will be made to implement it.
 
@@ -85,10 +85,10 @@ OMAP-L137 EVM is being used as the platform to design PMU. OMAP-L137 EVM doesnt 
 \caption{ADC Board block diagram}
 \label{fig:adc_board}
 \end{figure}
-Above Fig: \ref{fig:adc_board} shows the design logic of ADC board. Two AD7864-1 are used as ADC chips due to their high sampling rate of 500 ksps and direct input voltage compatibality range of $\pm$ 10 V. AD7864 is a high speed 4 channel simultaneous sampalling successive approximation ADC with \textit{bi-polar input} having conversion time as low as $1.65 \mu sec$. Chip's conversion sequence can be controlled through hardware as well as software, its default operating voltage is 5v but has a special output voltage shifter for interfacing it with 3.3v processors and controllers. This ADCs are fairly advance hence they have been interfaced with a special asynchronus peripheral interfacing architecture called EMIF-A, which is exclusively available in OMAP-L13x series processors. Extended Memory InterFace (EMIF) has two parts A \& B out of which EMIF-B is having \textit{Enhanced Direct Memory Access} controller (EDMA3) which enables the processor for multi-threaded rapid memory access and hence it is exclusively for highspeed SDRAM interfacing where as interface \textit{A} (EMIF-A) is developed for generic purposes more details are given below:
+Above Fig: \ref{fig:adc_board} shows the design logic of ADC board. Two AD7864-1 are used as ADC chips due to their high sampling rate of 500 ksps and direct input voltage compatibility range of $\pm$ 10 V. AD7864 is a high speed 4 channel simultaneous sampalling successive approximation ADC with \textit{bi-polar input} having conversion time as low as $1.65 \mu sec$. Chip's conversion sequence can be controlled through hardware as well as software, its default operating voltage is 5v but has a special output voltage shifter for interfacing it with 3.3v processors and controllers. This ADCs are fairly advance hence they have been interfaced with a special asynchronous peripheral interfacing architecture called EMIF-A, which is exclusively available in OMAP-L13x series processors. Extended Memory InterFace (EMIF) has two parts A \& B out of which EMIF-B is having \textit{Enhanced Direct Memory Access} controller (EDMA3) which enables the processor for multi-threaded rapid memory access and hence it is exclusively for highspeed SDRAM interfacing where as interface \textit{A} (EMIF-A) is developed for generic purposes more details are given below:
 
 \subsubsection{EMIF-A}
-EMIF-A controller is a 16-bit databus based versetile controller \cite{uguide:emifa}, designed to interact with variety of devices like 
+EMIF-A controller is a 16-bit databus based versatile controller \cite{uguide:emifa}, designed to interact with variety of devices like 
 \begin{itemize}
 \item Single Data Rate (SDR) RAM
 \item Asynchronous devices like NAND \& NOR flash memory and SRAM
@@ -121,12 +121,12 @@ Now we will see the operation that takes place when sampling  is to be done:
 \item Assert start of conversion (\texttt{CONVST}) is asserted via \texttt{EMA\_CS(4)}
 \item Due to this chip will start the conversion processes which will make \texttt{BUSY} high,
 \item Status of \texttt{BUSY}  will be checked via \texttt{DB15} \& \texttt{DB14} pins of the EMIFA header, for both the chips untill they are \texttt{low} again.
-\item The moment \texttt{BUSY} goes low, \texttt{EMA\_CS[2]} and \texttt{EMA\_A\_RE} are asserted with which AD7864 starts puting data on data lines. this processes of asserting is reapeated for 4 times, for each channel. The same is done using \texttt{EMA\_CS[3]} for getting data from 2nd ADC chip.
+\item The moment \texttt{BUSY} goes low, \texttt{EMA\_CS[2]} and \texttt{EMA\_A\_RE} are asserted with which AD7864 starts putting data on data lines. this processes of asserting is repeated for 4 times, for each channel. The same is done using \texttt{EMA\_CS[3]} for getting data from 2nd ADC chip.
 \end{itemize}
 
 
 \subsubsection{Computer}
-It will have the Phasor Data Concentrator (PDC) program, which will collate the data coming from our PMU coming over serial bus. PDC  usually has two functions one is to archive the data for historic reference and to send the data upward to higher level PDC for control actions and analytics. Here a PDC program developed by other M.Tech students is going to be used which is called \textbf{iPDC} \cite{site:ipdc}. iPDC has two parts, one part controlles the data sources and the communication of configuration frame. The other part \texttt{DBserver} works as a data storage manager, which archives the data received at an given port. Configuration frame is first communicated before starting the transmission of data to know the number of channels, digital status word etc.
+It will have the Phasor Data Concentrator (PDC) program, which will collate the data coming from our PMU coming over serial bus. PDC  usually has two functions one is to archive the data for historic reference and to send the data upward to higher level PDC for control actions and analytics. Here a PDC program developed by other M.Tech students is going to be used which is called \textbf{iPDC} \cite{site:ipdc}. iPDC has two parts, one part controls the data sources and the communication of configuration frame. The other part \texttt{DBserver} works as a data storage manager, which archives the data received at an given port. Configuration frame is first communicated before starting the transmission of data to know the number of channels, digital status word etc.
 Though for existing setup config frame wont be required so program can be modified accordingly to function without it.
 
 \begin{figure*}[t]

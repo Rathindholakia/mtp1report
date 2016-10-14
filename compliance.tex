@@ -1,7 +1,7 @@
 %----------------------------------------------------------------------------------------------------------------------------------------------------
 % INTRODUCTION
 \section{C37.118 Standard Compliance}
-\IEEEPARstart{E}very PMU should be able to calculate the value of phasor estimate accurately. The estimate will include positive sequence or single phase values, phase difference, freqnency and ROCOF. So it is importnat to keep in mind that the measurements are actually estimates of certain values.
+\IEEEPARstart{E}very PMU should be able to calculate the value of phasor estimate accurately. The estimate will include positive sequence or single phase values, phase difference, frequency and ROCOF. So it is important to keep in mind that the measurements are actually estimates of certain values.
 
 Now, for a given input wave the computation for estimating the desired quantity are given below:
 For estimating frequency:
@@ -27,16 +27,16 @@ RFE == |(df/dt)_{true}-(df/dt)_{measured} |
 \end{eqnarray}
 
 
-Apart from the above 3 quantitative parameters other three important parameters to be considered are measurement response time \& delay and reporting delay. \textit{Measurement response time} is the time to transition between two steady-state measurements before and after a step change is applied to the input. \textit{Measurement delay time} is defined as the time interval between the instant that a step change is applied to the input of a PMU and measurement time that the stepped parameter achieves a value that is halfway between the initial and final steady-state values \cite{std:c37}. The reason of measuring time delay is to verify that the time tagging has been compensatated properly or not.  \textit{Latency in reporting} is the time taken between the occurance of event in power system and that being reflacted in the output of the PMU. This parameter largely depends on the class of PMU and the sampling and filtering algorithem used. Which brings us to the classifiction of the PMU, they are divided in two parts:
+Apart from the above 3 quantitative parameters other three important parameters to be considered are measurement response time \& delay and reporting delay. \textit{Measurement response time} is the time to transition between two steady-state measurements before and after a step change is applied to the input. \textit{Measurement delay time} is defined as the time interval between the instant that a step change is applied to the input of a PMU and measurement time that the stepped parameter achieves a value that is halfway between the initial and final steady-state values \cite{std:c37}. The reason of measuring time delay is to verify that the time tagging has been compensated properly or not.  \textit{Latency in reporting} is the time taken between the occurrence of event in power system and that being reflected in the output of the PMU. This parameter largely depends on the class of PMU and the sampling and filtering algorithm used. Which brings us to the classification of the PMU, they are divided in two parts:
 \begin{enumerate}
 \item \textbf{Protection Class (P class):} This PMU is used for protection purposes and hence its response time should be as much less as possible.
-\item \textbf{Measurement Class (M class):}  This PMU class emphasies on the accuracy of the reported data and hence timing requirement are not as stringint as P class PMUs.
+\item \textbf{Measurement Class (M class):}  This PMU class emphasies on the accuracy of the reported data and hence timing requirement are not as stringent as P class PMUs.
 \end{enumerate} 
 
-On the basis of above class PMU's TVE tolerance limit is set, as discribed in above points protection class is for application requiring fast response and M class is for application requiring higher accuracy. TVE norms for P class are more stringent compared to M class. 
+On the basis of above class PMU's TVE tolerance limit is set, as described in above points protection class is for application requiring fast response and M class is for application requiring higher accuracy. TVE norms for P class are more stringent compared to M class. 
 
 \subsection{Validation \& Testing }
-To get the TVE, compliance tests are performed and during the test only the quentity under test is varied from the reference condition as per the test and other relevant quantities are maintained at reference condition. There are following kind of compliance tests:
+To get the TVE, compliance tests are performed and during the test only the quantity under test is varied from the reference condition as per the test and other relevant quantities are maintained at reference condition. There are following kind of compliance tests:
 \begin{enumerate}
 \item Steady-state compliance
 	\begin{enumerate}
