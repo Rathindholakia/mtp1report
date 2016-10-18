@@ -1,0 +1,317 @@
+\documentclass{beamer}
+\usetheme[everytitleformat=regular]{m}              % Use metropolis theme
+\usepackage{booktabs}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage[scale=2]{ccicons}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{transparent}
+\usepackage{animate}
+
+
+\title{Hardware-In-the-Loop Testing of Phasor Measurement Unit using Mini-Full Spectrum Simulator}
+\date{\today}
+\author{Rathin Dholakia}
+\institute{MTP Stage - 1}
+\begin{document}
+  \maketitle
+  \section{Introduction}
+
+
+ %=============  Slide - 2
+  \begin{frame}{Overview}
+ 	\begin{enumerate}
+  	\item Theoretical background
+  	\item Literature Survey
+  	\item Proposed Scheme
+  	\item Work Done
+  	\item Plan of work
+ 	\end{enumerate}
+   \end{frame}
+ %============Slide - 2 ends ===========
+ 
+ 
+   %---- SLIDE - 3  ================
+     \begin{frame}{Why Precise Time?}
+   	 \begin{center}
+		\begin{itemize}
+		\item Event Reconstruction - 14, Aug, 2003 North America 
+		\item Synchro Phasors / WAMS - Geographically separated
+		\item Multi-rate Billing
+		\item Traveling-wave Fault Detection 
+		\item Testing and verification of protective devices
+		\end{itemize}
+   	 \end{center}
+     \end{frame}
+    %============= Slide - 3 END ==============
+ 
+   %---- Slide - 4 ---------------
+   \begin{frame}{What - Basic Requirements}
+	 \begin{itemize}
+	 	\item Reference synchronized to national standard - UTC, Atomic clock
+	 	\item \textbf{Robustness:} Survive contingency, unstable clock
+	 	\item Should be \textbf{automated}, \textbf{customizable} and \textbf{efficient}
+	 	\item Not cause system infrastructure overhead.
+	 	\item \textbf{Security:} immune to intrusion \& withstand potential attacks
+	 \end{itemize}
+   
+   \end{frame}
+   %---- Slide - 4 ENDs --------------- 
+
+   %---------Slide-4 Starts ----------------
+   \begin{frame}{How - can we get it?}
+   There are different sources of accurate time:
+     \begin{enumerate}
+     	\item \textbf{Atomic clock}: Ultimate reference, cesium beam oscillator. Costly but longer stable operation  
+     	\item \textbf{GPS:} US DoD, Started 1980s - NAVSTAR, 1993- full functional, 24 satellites 
+     	\item \textbf{GLONASS:} 1976 USSR, better than GPS
+     	\item \textbf{Standard Radio Transmission:} Oldest time-keeping method, existent since 1920 
+     	\item Microwave or Terrestrial Distribution: US, UK \& Germany, sensitive to corona
+     \end{enumerate}
+   \end{frame}
+   %---------Slide-4 Ends ----------------
+
+   %---------Slide-5 Starts ----------------
+   \begin{frame}{How - can we get it? \tiny{(continued)}}
+   	Methods of Time Distribution:
+   	\begin{enumerate}
+   		\item Dedicated Timing Signals:
+   		\begin{itemize}
+   			\item 1 Pulse Per Minute (1 PPS):
+   			\begin{itemize}
+   				\item[-] Excellent accuracy $100 ns$
+   				\item[-] Simple, easy, flexible
+   				\item[-] Ambiguity of 1 year
+   			\end{itemize}
+   			\item IRIG 
+   			\begin{itemize}
+   				\item[-]  Inter-Range Instrumentation Group [1956-1970]
+   				\item[-] 7 codes [A - H] \& 2 Types [Modulated - Unmodulated]
+   				\item[-] Accuracy range: $10-50 ns$ 
+   				\item[-] Currently MOST used method commercially 
+   			\end{itemize}
+   		\end{itemize}
+   	\end{enumerate}
+   	\tiny continued...
+   \end{frame}
+   %---------Slide-5 Ends ----------------
+
+
+   %---------Slide-6 Starts ----------------
+   \begin{frame}{How - can we get it? \tiny{(continued)}}
+   	Engineering is about: Feasible - Simple - Cheap - Reliable solutions
+   	\small \textit{``Can't we use the same network to timekeep \& send data?"}\\
+
+   	\begin{enumerate}
+   		\setcounter{enumi}{1}
+   		\item   Network Time Synchronization:
+   		\begin{itemize}
+   			\item NTP/SNTP:
+   			\begin{itemize}
+   				\item[--] Existing since 1980s
+   				\item[--] Reliable, flexible, simple, cheap, robust 
+   				\item[--] Accuracy range: $10 - 100~ms$
+   				\item[--] Most widely used
+   			\end{itemize}
+   			\item PTP/IEEE 1588:
+   			\begin{itemize}
+   				\item [--] Extremely accurate
+   				\item [--] 2 modes : Software only \& Hardware-aided
+   				\item [--] Accuracy range: $20 - 100~ns$
+   				\item [--] Slowly replacing NTP, 1 PPS \& IRIG-B
+   			\end{itemize}
+   		\end{itemize}	
+   	\end{enumerate}
+   \end{frame}
+   %---------Slide-6 Ends ----------------
+   \section{Detailed Study}
+      %---------Slide-7 Starts ----------------
+      \begin{frame}{Network Time Protocol}
+      	\begin{enumerate}
+      		\item Epoch started on 1 Jan, 1972 at  2,272,060,800.0 seconds.
+      		\item 64-bit word length.
+      		\item Stratum, Synchronization Distance \& Dispersion.
+      	\end{enumerate}
+     \begin{figure}[!t]
+     	\centering 
+%     	\def\svgwidth{150pt} 
+%     	\includegraphics[scale=0.45]{ntp_delay.png}
+ %    	\caption{NTP Delay Calculation} 
+ %    	\label{fig:ntp_delay} 
+     \end{figure}
+    \centering $a = T_{i-2}- T_{i-3}$ \quad and \quad $b =T_{i-1}- T_{i}$    
+	\begin{displaymath}
+	\centering
+	\delta_{i} = a - b \quad \textrm{and} \quad \theta_{i} = \frac{a+b}{2} 
+	\end{displaymath}      	 
+      \end{frame}
+      %---------Slide-7 Ends ----------------
+
+   %---------Slide-8 Starts ----------------
+   \begin{frame}{Contingency}
+   	\begin{figure}
+  % 		\includegraphics[scale=0.3]{ntp_ntwrk.png} \quad
+   %		\includegraphics[scale=0.3]{ntp_ntwrk2.png}
+   	\end{figure}
+   	In case of network disruption, NTP adapts itself to optimum configuration, it uses algorithms like (but not limited to): 
+   	\begin{itemize}
+   		\item Peer-selection algorithm
+   		\item Convergence \& Consistency algorithm, minimum filter \& minimum average algorithm.
+   		\item Agreement algorithm for peer-selection (adaptation of maximum likelihood algorithm )
+   	\end{itemize} 
+   \end{frame}
+   %---------Slide-8 Ends ----------------
+
+   %---------Slide-9 Starts ----------------
+   \begin{frame}{PTP/ IEEE 1588}
+   	\begin{itemize}
+   		\item Defined in 2002, standard quotes:\\
+   		 {\small \textit{``IEEE 1588 is designed to fill a niche \alert{not well served} by either of the two dominant protocols, NTP and GPS. IEEE 1588 is designed for \alert{local systems} requiring accuracies beyond those attainable using NTP... for applications that \alert{cannot bare cost of GPS} receivers.." }}
+   		\item {\normalsize Two modes} - Software-only \& Hardware assisted
+   		\item It can be called an enhanced version of NTP.
+   		\item Hardware-aided mode - highly accurate: 1 - 10 ns
+   		\item CERN is using enhanced PTP with accuracy of $3~sps$ 
+   	\end{itemize}
+
+   \end{frame}
+   %---------Slide-9 Ends ----------------
+   
+   %---------Slide-10 Starts ----------------
+    \begin{frame}{How is it different than?}
+    	\begin{columns}
+    		\column{0.4\textwidth}
+   		
+    		\column{0.6\textwidth}
+
+    		\begin{itemize}
+    			\item Calculation same as NTP but
+    			\item Variable path delay calculated in hardware mode:
+    			\begin{itemize}
+    				\item[--] Transparent Clock 
+ 	    			\item[--] Boundry clock 
+ 	    			\item[--] Grandmaster clock
+    			\end{itemize} 
+    			\item Only one reference (1 grandmaster at a time)
+    			\item Proactive delay synching 
+    		\end{itemize}
+    	\end{columns}
+   
+    \end{frame}
+    %---------Slide-10 Ends ----------------
+      
+      \section{Case Study}
+    %---------Slide-11 Starts ----------------
+    \begin{frame}{NTP v/s PTP}
+blahblahsjhkjsdkjsd
+   \end{frame}
+    %---------Slide-11 Ends ----------------
+
+    %---------Slide-11 Starts ----------------
+    \begin{frame}{NTP v/s PTP \small(Case-1, link-1 fails)}
+adslsdflsdf
+    \end{frame}
+    %---------Slide-11 Ends ----------------
+
+    %---------Slide-11 Starts ----------------
+    \begin{frame}{NTP v/s PTP \small(Case-2, link-3 fails)}
+
+fake fake
+    \end{frame}
+    %---------Slide-11 Ends ----------------
+
+    %---------Slide-11 Starts ----------------
+    \begin{frame}{NTP v/s PTP \small(Case-3, link-2 fails)}
+fakealkds;lksj;oiwejr
+    \end{frame}
+    %---------Slide-11 Ends ---------------
+
+    %---------Slide-11 Starts ----------------
+    \begin{frame}{NTP v/s PTP \small(Case-4, Both masters fails)}
+werwerqwerq
+    \end{frame}
+    %---------Slide-11 Ends ---------------
+    %---------Slide-11 Starts ----------------
+    \begin{frame}{NTP v/s PTP\small why PTP is preferred}
+werwesdfsdfs
+    \end{frame}
+    %---------Slide-11 Ends ---------------
+
+    %---------Slide-11 Starts ----------------
+    \begin{frame}{Conclusion}
+\begin{columns}
+	\column{0.5\textwidth}
+	\textbf{NTP}
+	\begin{itemize}
+		\item Can work on network of any dimension
+		\item No additional hardware
+		\item No network modification
+		\item Practically no additional cost
+		\item Least possible network overhead
+		\item Simple - cheap - robust - flexible
+	\end{itemize}
+	
+	\column{0.5\textwidth}
+	\textbf{PTP}
+	\begin{itemize}
+		\item  Highly Accurate 
+		\item Variable packet delay compensated
+		\item  Can handle greater network disruption - Robust
+		\item Reliability is high so mission critical
+	\end{itemize}
+	\vspace{1.7cm}
+\end{columns}
+    \end{frame}
+    %---------Slide-11 Ends ---------------
+
+    
+    %---------Slide-11 Starts ----------------
+    \begin{frame}{References}
+\begin{thebibliography}{1}
+	\tiny
+	%\bibitem{IEEEhowto:kopka}
+	%H.~Kopka and P.~W. Daly, \emph{A Guide to \LaTeX}, 3rd~ed.\hskip 1em plus
+	%  0.5em minus 0.4em\relax Harlow, England: Addison-Wesley, 1999.
+	
+	\bibitem{NTP}
+	David L.  Mills,  Member,  IEEE \emph{Internet  Time  Synchronization: 
+		The  Network  Time  Protocol }, IEEE  TRANS. COMM., Vol.~39, No.10,  1991 
+	\bibitem{PTP}
+	IEEE Std 1588-2008: Technical Committee on Sensor Technology (TC-9), Revision of 2002.
+	
+	\bibitem{theFutureofTimeSynch}
+	B.~Baumgartner, C.~Riesch and Manfred Rudigier, \emph{The Future of Time Synchronization in the Electric Power Industry}, OMICRON electronics GmbH.
+	
+	\bibitem{NTPandPTP}
+	Precise Time and Frequency, Inc., \emph{NTP and PTP}, Precise Time and Frequency, Inc., USA  
+	
+	\bibitem{TimeinPower}
+	Bill Dickerson, \emph{Time in the Power Industry}, Arbiter Systems Inc.,
+	
+	\bibitem{NTPwiki}
+	\url{https://en.wikipedia.org/wiki/Network_Time_Protocol}
+	
+	\bibitem{NTPsite}
+	\url{ntp.org}
+	
+	\bibitem{NTPvsPTP}
+	\url{http://www.en4tel.com/pdfs/NTPandPTP-A-Brief-Comparison.pdf}
+	
+	\bibitem{comparePTPNTP}
+	\url{http://blog.meinbergglobal.com/2013/11/22/ntp-vs-ptp-network-timing-smackdown/}
+	
+	\bibitem{RFC958}
+	David Mills, \emph{RFC 958}, \url{https://tools.ietf.org/html/rfc958}
+\end{thebibliography}
+    \end{frame}
+    %---------Slide-11 Ends ----------------
+
+
+   %---------Slide-4 Starts ----------------
+   \begin{frame}
+   \begin{center}
+   \includegraphics[scale=0.3]{thanku.png}
+   \end{center}
+   \end{frame}
+      %---------Slide-4 Ends ---------------- 
+\end{document}
