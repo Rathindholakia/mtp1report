@@ -223,7 +223,86 @@ Test under C37.118.1aTM-2014”}}
 \item Use \textbf{iPDC} in a PC
 \end{itemize}
 \end{frame}
-   
+
+%============ New Slide=========
+\begin{frame}{Full Spectrum Simulator}
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\begin{figure}
+\includegraphics[width=\columnwidth]{fig/FSS_arch.png}
+\caption{FSS Archicture}
+\end{figure}
+\end{column}
+\begin{column}{0.5\textwidth}
+\begin{itemize}
+\item Card Based structure
+\item System Interface Card (SIC)
+\item Intra Rack Control Card (IRC Card)
+\item Three CPU Cards, each having 3 DSPs. So total 9 processors
+\item one Analog I/O Card
+\item Digital I/O card 
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}   
+
+%============ New Slide =======================
+\begin{frame}{Full Spectrum Simulator}
+\begin{figure}
+\includegraphics[scale=0.3]{fig/fss_arch2.png}
+\caption{FSS Architecture}
+\end{figure}
+\end{frame}
+
+%========= New Slide =====================
+\begin{frame}{PMU Architecture - Platform}
+We require a processors which can do two things 
+\begin{itemize}
+\item High speed -Digital signal processing  
+\item Uppper level packet forming
+\end{itemize}
+Hence an asymmatric dual core processor - DSP + ARM
+\begin{itemize}
+\item OMAPM L-137 or L-138 (C6747 DSP + ARM 926EJ)
+\item Hawk-Board V/s Omap-L137 Evaluation Module
+\end{itemize}
+\end{frame}
+
+%=== New Slide ====================
+\begin{frame}{PMU Architecture - Platform}
+\begin{figure}
+\includegraphics[scale=0.8]{fig/Hawkboard_hw.jpg}
+\end{figure}
+\end{frame}
+
+%====================
+\begin{frame}{PMU Architecture - Platform}
+\begin{figure}
+\includegraphics[scale=0.39]{fig/hwkbrd.jpg}
+\end{figure}
+\end{frame}
+
+%==========================
+
+\begin{frame}{PMU Architecture - OMAP L137 EVM}
+\begin{figure}
+\includegraphics[width=\textwidth]{fig/omapl137-evm-board.jpg}
+\caption{ OMAP- L137 EVM }
+\end{figure}
+\end{frame}
+
+%=======================
+\begin{frame}{PMU Architecture - OMAP L137 EVM}
+\begin{figure}
+\includegraphics[width=\textwidth]{fig/OMAP_L137EVM.png}
+\caption{Block Diagram of EVM \cite{site:evm}}
+\end{figure}
+\end{frame}
+
+%=================
+\begin{frame}{PMU Architecture - ADC Board}
+
+\end{frame}
     %---------Slide-11 Starts ----------------
     \begin{frame}{References}
 \begin{thebibliography}{1}
@@ -253,6 +332,8 @@ Test under C37.118.1aTM-2014”}}
 	\bibitem{Paper:saugata}
 	Saugata S. Biswas, Jeong Hun Kim, Anurag K Srivastava ``Development of a Smart Grid Test Bed and Applications in PMU and PDC Testing", \textit{IEEE Conference Publications}, 2012.	
 	
+	\bibitem{site:evm}
+	http://www.ti.com/tool/tmdxevm1707
 
 \end{thebibliography}
     \end{frame}
