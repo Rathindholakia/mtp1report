@@ -33,7 +33,7 @@
  
  %==== New SLide ========================
  
- \begin{frame}{Aim of Experiment}
+ \begin{frame}{Aim of Project}
  \begin{figure}
  \includegraphics*[scale=0.1]{Aim.png}
  \end{figure}
@@ -71,13 +71,13 @@
  
    %---- Slide - 4 ---------------
    \begin{frame}{Background - PMU Basics}
-   PMU: It is a device wich givens you an estimate of the phasor 
+   PMU: It is a device which gives you an estimate of the phasor 
    \begin{figure}
    \includegraphics*[scale = 0.2]{Circle-To-Sine-Wave.png}
    \caption{Sine to Circle representation \cite{site:westau}}
    \end{figure}
 
-   \textbf{Sinulsoid:} \textbf{$x(t) = X_m cos(\omega t + \varphi)$} \\
+   \textbf{Sinusoid:} \textbf{$x(t) = X_m cos(\omega t + \varphi)$} \\
 	\textbf{Phasor Representation:} $\textbf{X} = \frac{Xm}{\sqrt{2}}\exp^{j\phi} $ or $\textbf{X} = X_r+jX_i$
 	\textbf{Frequency} $f(t) = \frac{1}{2\pi} \dfrac{d\psi(t)}{dt}$\\
 	\textbf{ROCOF} $= df(t)/dt$
@@ -151,8 +151,9 @@ We will See 3 paper here, which are closest to our implementation
 \end{frame}
 
 %===================== New Lide
-\begin{frame}{paper-1}
-Title: \textbf{Dynamic PMU Compliance Test under C37.118.1a-2014} By R. Ghiga
+\begin{frame}{Dynamic PMU Compliance Test under C37.118.1a-2014\footnote{R. Ghiga, Q. Wu, K. Martin, W. Z. El-Khatib “Dynamic PMU Compliance
+Test under C37.118.1aTM-2014”}}
+
 \begin{itemize}
 \item Doble F6150 Power System Simulator
 \item Three Different PMUs
@@ -166,26 +167,27 @@ Title: \textbf{Dynamic PMU Compliance Test under C37.118.1a-2014} By R. Ghiga
 	\item Phase Step Test: 
 	\item Freq. Ramp: $\pm$ 1 Hz/s between (44 to 55 Hz)
 \end{itemize}
-
+\item IMP: Test signals are \textbf{not} time synchronised.
 \end{itemize}
-IMP: Test signals are \textbf{not} time synchronised.
+
 \end{frame}
 
 %=========== New SLide ===================
-\begin{frame}
-Title: \textbf{Development of a Smart Grid Test Bed and Applications in PMU and PDC Testing} By Saugata S. B
+\begin{frame}{\tiny{Development of a Smart Grid Test Bed and Applications in PMU and PDC Testing} \footnote{\tiny Saugata S. Biswas, Jeong Hun Kim, Anurag K Srivastava “Development of a Smart Grid Test Bed and Applications in PMU and PDC Testing} }
 \begin{itemize}
+\tiny
 \item RTDS
 \item Multiple Relays/PMU
 \item Power Amplifier stanges 
 \end{itemize}
 \begin{figure}
-\includegraphics[scale=0.28]{wsu_pmu_setup.png}
+\includegraphics[scale=0.27]{wsu_pmu_setup.png}
 \end{figure}
 \end{frame}
+
 % ===================== New Slide
 
-\begin{frame}
+\begin{frame}{\tiny{Development of a Smart Grid Test Bed and Applications in PMU and PDC Testing} \footnote{\tiny Saugata S. Biswas, Jeong Hun Kim, Anurag K Srivastava “Development of a Smart Grid Test Bed and Applications in PMU and PDC Testing} }
 \begin{itemize}
 \item Test signals are GPS synchronised
 \item Multiple Devices acting as PMU - Multi-vendor relays
@@ -194,8 +196,7 @@ Title: \textbf{Development of a Smart Grid Test Bed and Applications in PMU and 
 \end{frame}   
 
 %========== New slide ================
-\begin{frame}{Paper - 3}
-Title: \textbf{Dynamic Performance Evaluation and Testing of PMU under C.31.118-2011} by  Krish Narendra
+\begin{frame}{\small{Dynamic Performance Evaluation and Testing of PMU under C.31.118-2011}\footnote{\tiny Krish Narendra, Dinesh Rangana Gurusinghe, \textit{Dynamic Performance Evaluation and Testing of Phasor Measurement Unit (PMU) as per IEEE C37.118.1 Standard}}}
 \begin{itemize}
 \item Doble F6150 Power System Simulator
 \item TESLA 4000 PMU
