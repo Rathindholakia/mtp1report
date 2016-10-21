@@ -301,8 +301,33 @@ Hence an asymmatric dual core processor - DSP + ARM
 
 %=================
 \begin{frame}{PMU Architecture - ADC Board}
-
+For Sensing supply iputs we require ADCs which should have:
+\begin{itemize}
+\item Good sampling rate: ~200 Samples/Sec
+\item No of channels: 3 + 3 = 6 (3 - $\phi$ voltage and current) 
+\item Interfacing type: It should be memory addressable and voltage level compatible  to the EVM.
+\item Input type: FSS analog output is differential which can be configured as single ended, its voltage level is $\pm$10V
+\end{itemize}
 \end{frame}
+
+%================== New slides ==============
+\begin{frame}{PMU Architecture - ADC Board}
+
+\begin{itemize}
+\item Out several options we nerrowed down on \textbf{AD7606} or \textbf{AD7864}
+\item AD7864 was choosen has following specification
+\begin{itemize}
+	\item[-] High speed (1.65 $\mu$s) 12-bit ADC 
+	\item[-] 4 simultaneously sampled inputs
+	\item[-] 0.35 $\mu$s track-and-hold acquisition time 
+	\item[-] 1.65 $\mu$s conversion time per channel 
+	\item[-] HW/SW select of channel sequence for conversion 
+	\item[-] $\pm$ 10V \& $\pm$ 5V operation
+	\item[-] Special Interfacing arrangement for 3 V processor 
+\end{itemize} 
+\end{itemize}
+\end{frame}
+
     %---------Slide-11 Starts ----------------
     \begin{frame}{References}
 \begin{thebibliography}{1}
