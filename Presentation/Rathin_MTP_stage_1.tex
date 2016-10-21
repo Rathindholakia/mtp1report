@@ -10,7 +10,7 @@
 \usepackage{animate}
 
 
-\title{ H-I-L Testing of Phasor Measurement Unit using Mini-Full Spectrum Simulator}
+\title{ Hardware-In-Loop Testing of Phasor Measurement Unit using Mini-Full Spectrum Simulator}
 \date{\today}
 \author{Rathin Dholakia \\Guided By:\\ Prof. M. C. Chandorkar}
 \institute{MTP Stage - 1}
@@ -25,7 +25,7 @@
   	\item Theoretical background
   	\item Literature Survey
   	\item Proposed Scheme
-  	\item Work Done
+  	\item Implementation
   	\item Plan of work
  	\end{enumerate}
    \end{frame}
@@ -40,9 +40,9 @@
  \begin{itemize}
  \item \textbf{To test the feasibility of Full Spectrum Smulator (FSS) as well as the PMU device as per IEEE C37.118 PMU standard}
  \begin{itemize}
-	 \item[-] Implement a power system model having different test case scenarios
-  	\item[-] To use indigenously develop or self designed PMU hadrware
-	 \item[-] Evaluate the performance of
+	 \item[-] Implement a power system model having different test case scenarios in FSS
+  	\item[-] To use indigenously developed or self-designed PMU hardware
+	 \item[-] Evaluate the performance of FSS and PMU both
  \end{itemize}
  
  \end{itemize}
@@ -89,12 +89,14 @@
 \begin{frame}{Why Standards are required?}
 \centering
 All previous equations are frequency dependent - $f_0$ - Fundamental frequency
-\begin{figure}
 \includegraphics[scale=0.2]{sine_sampled.png} \\
-\end{figure}
 \pause
-\includegraphics[scale=0.1]{multisine.png}\\
-Different make - Incompatibility 
+
+\includegraphics[scale=0.1]{multisine.png}
+
+\pause
+
+\hspace{50pt}Different make - Incompatibility 
 \end{frame}
    %======= Slide Ends ===================
    
@@ -104,9 +106,9 @@ Different make - Incompatibility
 %   \centering
 
 	\begin{itemize}
-	\item Two Quantities to observe - Amplitude \& Phase
+	\item Two quantities to observe - Amplitude \& Phase
 	\item Frequency dependency of the result
-	\item we require a reference which is  independent and time invarient.
+	\item Ee require a reference which is  independent and time invarient.
 	\item Hence \textbf{Total Vector Error (TVE)} %$^\cite{std:c37}$ 
 	\end{itemize}
 	$ TVE(n) = \sqrt{\frac{ (\hat{X}_r(n) - X_r(n))^2 + (\hat{X}_i(n)-X_i(n))^2} {X_r(n)^2 + X_i(n)^2}} $ \\
@@ -128,7 +130,7 @@ To get the TVE, compliance test(s) are performed, recommended by C37.118
 	\begin{enumerate}
 	\item Synchrophasor measurement bandwidth requirements using modulated test signals
 	\item Ramp of system frequency
-	\item Step changes in phase and magnitude
+	\item Step changes in phase and magnitude 
 	\end{enumerate}
 \end{enumerate} 
 
@@ -147,7 +149,7 @@ Basically there are 3 components to any arrangement
 \item Recording device (PDC etc.)
 \end{itemize}
 
-We will See 3 paper here, which are closest to our implementation
+ Will discuss paper which are closest to our implementation
 \end{frame}
 
 %===================== New Lide
@@ -157,7 +159,7 @@ Test under C37.118.1aTM-2014”}}
 \begin{itemize}
 \item Doble F6150 Power System Simulator
 \item Three Different PMUs
-\item Direct PMU - PSS interfacing
+\item Direct PMU - Power Sys Simulator interfacing
 \item Test Performed \cite{Paper:ghiga} : 
 
 \begin{itemize}
@@ -190,7 +192,7 @@ Test under C37.118.1aTM-2014”}}
 \begin{frame}{\tiny{Development of a Smart Grid Test Bed and Applications in PMU and PDC Testing} \footnote{\tiny Saugata S. Biswas, Jeong Hun Kim, Anurag K Srivastava “Development of a Smart Grid Test Bed and Applications in PMU and PDC Testing} }
 \begin{itemize}
 \item Test signals are GPS synchronised
-\item Multiple Devices acting as PMU - Multi-vendor relays
+\item Multiple devices acting as PMU - Multi-vendor relays
 \item Results validated by PMU Tester
 \end{itemize}
 \end{frame}   
@@ -203,10 +205,10 @@ Test under C37.118.1aTM-2014”}}
 \item Direct PMU-RTDS interfacing
 \item Testing Steps:
 \begin{itemize}
-	\item PSCAD/EMTDC generates precisecurrent and voltage signals
+	\item PSCAD/EMTDC generates precise current and voltage signals
 	\item Power System Sim. plays it in realtime
 	\item Test signals are time Synchronised
-	\item The M class operating range is considered as P class is subset of M. 
+	\item The M class operating range is considered, as P class is subset of M. 
 \end{itemize}
 \end{itemize}
 \end{frame}
@@ -239,7 +241,7 @@ Test under C37.118.1aTM-2014”}}
 \item System Interface Card (SIC)
 \item Intra Rack Control Card (IRC Card)
 \item Three CPU Cards, each having 3 DSPs. So total 9 processors
-\item one Analog I/O Card
+\item One Analog I/O Card
 \item Digital I/O card 
 \end{itemize}
 \end{column}
@@ -259,7 +261,7 @@ Test under C37.118.1aTM-2014”}}
 We require a processors which can do two things 
 \begin{itemize}
 \item High speed -Digital signal processing  
-\item Uppper level packet forming
+\item Uppper level tasks - packet forming, Time stamping, ethernet communication
 \end{itemize}
 Hence an asymmatric dual core processor - DSP + ARM
 \begin{itemize}
@@ -301,9 +303,9 @@ Hence an asymmatric dual core processor - DSP + ARM
 
 %=================
 \begin{frame}{PMU Architecture - ADC Board}
-For Sensing supply iputs we require ADCs which should have:
+For sensing supply inputs we require ADCs which should have:
 \begin{itemize}
-\item Good sampling rate: ~200 Samples/Sec
+\item Good sampling rate: $\sim$200 Samples/Sec
 \item No of channels: 3 + 3 = 6 (3 - $\phi$ voltage and current) 
 \item Interfacing type: It should be memory addressable and voltage level compatible  to the EVM.
 \item Input type: FSS analog output is differential which can be configured as single ended, its voltage level is $\pm$10V
@@ -328,6 +330,48 @@ For Sensing supply iputs we require ADCs which should have:
 \end{itemize}
 \end{frame}
 
+%=====================================
+\begin{frame}{PMU Architecture - EMIFA}
+EMIF-A controller is a 16-bit databus based versatile controller \cite{uguide:emifa}, designed to interact with variety of devices like 
+\begin{columns}
+\begin{column}{0.5\textwidth}
+
+	\begin{itemize}
+	\item Single Data Rate (SDR) RAM
+	\item Asynchronous devices like NAND \& NOR flash memory and SRAM
+	\end{itemize}
+	lot of features to ease and facilitate the usage of asynchronous devices
+	\end{column}
+
+\begin{column}{0.5\textwidth}
+	\begin{figure}
+	\includegraphics[width=\columnwidth]{fig/EMIFA.png}
+	\caption{EMIFA Block Diagram \cite{uguide:emifa} }
+	\label{fig:EMIFA}
+	\end{figure}
+\end{column}
+\end{columns}
+\end{frame}
+
+%==============================================
+\begin{frame}{PMU Architecture - ADC board Arrangement}
+\begin{figure}
+\includegraphics[scale= 0.4]{fig/ADC_board.png}
+\caption{ADC Board block diagram}
+\end{figure}
+\end{frame}
+
+%===========================================
+\begin{frame}{Future Scope}
+\begin{itemize}
+\item Test ADC board, check its performance after connecting it with OMAP-L137 EVM.
+\item Interfacing of GPS module and DSP programming for time based signal sampling.
+\item Implement and test DFT algorithm for the phasor estimation and reconstruction.
+\item Testing of whole setup along with simple test input from FSS.
+\item Test PMU setup using FSS as real time player and analyse the result.
+\item Implement a test system in FSS using multi-cores and do the testing and analysis.
+\end{itemize}
+\end{frame}
     %---------Slide-11 Starts ----------------
     \begin{frame}{References}
 \begin{thebibliography}{1}
@@ -357,8 +401,17 @@ For Sensing supply iputs we require ADCs which should have:
 	\bibitem{Paper:saugata}
 	Saugata S. Biswas, Jeong Hun Kim, Anurag K Srivastava ``Development of a Smart Grid Test Bed and Applications in PMU and PDC Testing", \textit{IEEE Conference Publications}, 2012.	
 	
+	\bibitem{paper:nrendra}
+	Krish Narendra, Dinesh Rangana Gurusinghe, \textit{Dynamic Performance Evaluation and Testing of Phasor Measurement Unit (PMU) as per IEEE C37.118.1 Standard}, Doble Client Commitee, 2012 
+	
 	\bibitem{site:evm}
 	http://www.ti.com/tool/tmdxevm1707
+	
+	\bibitem{uguide:emifa}
+	TMS320C674x/OMAP-L1x Processor External Memory Interface A (EMIFA) User Guide, Texas Instrument
+
+	\bibitem{Paper:fssmanual}
+	Technical Report of Full Spectrum Simulator under National Mission on Power Electronics Technology (NaMPET Phase-II), Submitted by Power Electronics Group CDAC, Thiruvananthapuram
 
 \end{thebibliography}
     \end{frame}
