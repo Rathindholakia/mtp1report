@@ -34,18 +34,22 @@
  %==== New SLide ========================
  
  \begin{frame}{Aim of Project}
+  \begin{itemize}
+  \item \textbf{Test the feasibility of using Full Spectrum Simulator (FSS) as a test bench for PMU testing}
+  \item \textbf{Test PMU device compliance as per IEEE C37.118 PMU standard}
+  \end{itemize}
+
  \begin{figure}
  \includegraphics*[scale=0.1]{Aim.png}
  \end{figure}
- \begin{itemize}
- \item \textbf{To test the feasibility of Full Spectrum Smulator (FSS) as well as the PMU device as per IEEE C37.118 PMU standard}
+
  \begin{itemize}
 	 \item[-] Implement a power system model having different test case scenarios in FSS
   	\item[-] To use indigenously developed or self-designed PMU hardware
 	 \item[-] Evaluate the performance of FSS and PMU both
  \end{itemize}
  
- \end{itemize}
+
  \end{frame} 
  
  
@@ -53,11 +57,11 @@
  
    %---- SLIDE - 3  ================
      \begin{frame}{Backgorund - Terms}
-   	 \textbf{C37.118} It is a PMU standard stating the measurement provisions, performance criterion and Data communication protocol.
+   	 \textbf{C37.118} It is a PMU standard stating the measurement provisions, performance criterion and data communication protocol.
    	 \begin{center}
 		\begin{itemize}
-		\item \textbf{Phasors:} A complex number which represents both magnitude and angle of an AC quantity.
-		\item \textbf{Synchrophasors:} synchronized sampling/measurement of phasor at a precise reference (time)
+		\item \textbf{Phasors:} A complex number which represents both magnitude and phase of an AC quantity.
+		\item \textbf{Synchrophasors:} Synchronized sampling/measurement of phasor at a precise reference (time)
 		\end{itemize}
 		\begin{figure}
 		\includegraphics*[scale=0.5]{Phasors.png}
@@ -78,8 +82,8 @@
    \end{figure}
 
    \textbf{Sinusoid:} \textbf{$x(t) = X_m cos(\omega t + \varphi)$} \\
-	\textbf{Phasor Representation:} $\textbf{X} = \frac{Xm}{\sqrt{2}}\exp^{j\phi} $ or $\textbf{X} = X_r+jX_i$
-	\textbf{Frequency} $f(t) = \frac{1}{2\pi} \dfrac{d\psi(t)}{dt}$\\
+	\textbf{Phasor Representation:} $\textbf{X} = \frac{Xm}{\sqrt{2}}e^{j\phi} $ or $\textbf{X} = X_r+jX_i$ \\
+	\textbf{Frequency} $f(t) = \frac{1}{2\pi}\frac{d\psi(t)}{dt}$\\
 	\textbf{ROCOF} $= df(t)/dt$
    
    \end{frame}
@@ -108,18 +112,21 @@ All previous equations are frequency dependent - $f_0$ - Fundamental frequency
 	\begin{itemize}
 	\item Two quantities to observe - Amplitude \& Phase
 	\item Frequency dependency of the result
-	\item Ee require a reference which is  independent and time invarient.
-	\item Hence \textbf{Total Vector Error (TVE)} %$^\cite{std:c37}$ 
+	\item It require a reference which is  independent and time invarient.
+	\pause
+	
+	\item \textbf{Total Vector Error (TVE)} %$^\cite{std:c37}$ 
 	\end{itemize}
-	$ TVE(n) = \sqrt{\frac{ (\hat{X}_r(n) - X_r(n))^2 + (\hat{X}_i(n)-X_i(n))^2} {X_r(n)^2 + X_i(n)^2}} $ \\
+	$$ TVE(n) = \sqrt{\frac{ (\hat{X}_r(n) - X_r(n))^2 + (\hat{X}_i(n)-X_i(n))^2} {X_r(n)^2 + X_i(n)^2}} $$ \\
 \vspace{5pt}
+\pause
  \textbf{Type of PMU:}\\
  -Protection  Class: Time critical application, More stringent requirement \\ 
  -Measurement Class: Greater precision not (very) time critical 
    \end{frame}
 %=============== Start Slide ===========================
 \begin{frame}{Types of Tests}
-To get the TVE, compliance test(s) are performed, recommended by C37.118
+To find the TVE, compliance test(s) are performed, recommended by C37.118
 \begin{enumerate}
 \item Steady-state compliance
 	\begin{enumerate}
@@ -129,7 +136,7 @@ To get the TVE, compliance test(s) are performed, recommended by C37.118
 \item Dynamic compliance
 	\begin{enumerate}
 	\item Synchrophasor measurement bandwidth requirements using modulated test signals
-	\item Ramp of system frequency
+	\item Frequency ramp test
 	\item Step changes in phase and magnitude 
 	\end{enumerate}
 \end{enumerate} 
@@ -142,19 +149,18 @@ To get the TVE, compliance test(s) are performed, recommended by C37.118
 %============= New Slide ============================
 
 \begin{frame}{Literature Survey}
-Basically there are 3 components to any arrangement
+Basically there are 3 components in any test arrangement
 \begin{itemize}
 \item Device Generating Test Signal
 \item PMU under test
 \item Recording device (PDC etc.)
 \end{itemize}
 
- Will discuss paper which are closest to our implementation
 \end{frame}
 
 %===================== New Lide
-\begin{frame}{Dynamic PMU Compliance Test under C37.118.1a-2014\footnote{R. Ghiga, Q. Wu, K. Martin, W. Z. El-Khatib “Dynamic PMU Compliance
-Test under C37.118.1aTM-2014”}}
+\begin{frame}{Dynamic PMU Compliance Test under C37.118.1a-2014\footnote{\tiny R. Ghiga, Q. Wu, K. Martin, W. Z. El-Khatib, ``Dynamic PMU Compliance
+Test under C37.118.1a-2014"}}
 
 \begin{itemize}
 \item Doble F6150 Power System Simulator
@@ -175,21 +181,15 @@ Test under C37.118.1aTM-2014”}}
 \end{frame}
 
 %=========== New SLide ===================
-\begin{frame}{\tiny{Development of a Smart Grid Test Bed and Applications in PMU and PDC Testing} \footnote{\tiny Saugata S. Biswas, Jeong Hun Kim, Anurag K Srivastava “Development of a Smart Grid Test Bed and Applications in PMU and PDC Testing} }
-\begin{itemize}
-\tiny
-\item RTDS
-\item Multiple Relays/PMU
-\item Power Amplifier stanges 
-\end{itemize}
+\begin{frame}{{Development of a Smart Grid Test Bed and Applications in PMU and PDC Testing} \footnote{\tiny Saugata S. Biswas, Jeong Hun Kim, Anurag K Srivastava ``Development of a Smart Grid Test Bed and Applications in PMU and PDC Testing"} }
 \begin{figure}
-\includegraphics[scale=0.27]{wsu_pmu_setup.png}
+\includegraphics[width=0.85\textwidth]{fig/smart_test_bench.png}
 \end{figure}
 \end{frame}
 
 % ===================== New Slide
 
-\begin{frame}{\tiny{Development of a Smart Grid Test Bed and Applications in PMU and PDC Testing} \footnote{\tiny Saugata S. Biswas, Jeong Hun Kim, Anurag K Srivastava “Development of a Smart Grid Test Bed and Applications in PMU and PDC Testing} }
+\begin{frame}{Development of a Smart Grid Test Bed and Applications in PMU and PDC Testing \footnote{\tiny Saugata S. Biswas, Jeong Hun Kim, Anurag K Srivastava “Development of a Smart Grid Test Bed and Applications in PMU and PDC Testing} }
 \begin{itemize}
 \item Test signals are GPS synchronised
 \item Multiple devices acting as PMU - Multi-vendor relays
@@ -198,7 +198,7 @@ Test under C37.118.1aTM-2014”}}
 \end{frame}   
 
 %========== New slide ================
-\begin{frame}{\small{Dynamic Performance Evaluation and Testing of PMU under C.31.118-2011}\footnote{\tiny Krish Narendra, Dinesh Rangana Gurusinghe, \textit{Dynamic Performance Evaluation and Testing of Phasor Measurement Unit (PMU) as per IEEE C37.118.1 Standard}}}
+\begin{frame}{{Dynamic Performance Evaluation and Testing of PMU under C.31.118-2011}\footnote{\tiny Krish Narendra, Dinesh Rangana Gurusinghe, ``Dynamic Performance Evaluation and Testing of Phasor Measurement Unit (PMU) as per IEEE C37.118.1 Standard"}}
 \begin{itemize}
 \item Doble F6150 Power System Simulator
 \item TESLA 4000 PMU
@@ -231,7 +231,7 @@ Test under C37.118.1aTM-2014”}}
 \begin{columns}
 \begin{column}{0.5\textwidth}
 \begin{figure}
-\includegraphics[width=\columnwidth]{fig/FSS_arch.png}
+\includegraphics[width=\columnwidth]{fig/fss_arch2.png}
 \caption{FSS Archicture}
 \end{figure}
 \end{column}
@@ -248,22 +248,22 @@ Test under C37.118.1aTM-2014”}}
 \end{columns}
 \end{frame}   
 
-%============ New Slide =======================
-\begin{frame}{Full Spectrum Simulator}
-\begin{figure}
-\includegraphics[scale=0.3]{fig/fss_arch2.png}
-\caption{FSS Architecture}
-\end{figure}
-\end{frame}
+%%============ New Slide =======================
+%\begin{frame}{Full Spectrum Simulator}
+%\begin{figure}
+%\includegraphics[scale=0.3]{fig/fss_arch2.png}
+%\caption{FSS Architecture}
+%\end{figure}
+%\end{frame}
 
 %========= New Slide =====================
 \begin{frame}{PMU Architecture - Platform}
-We require a processors which can do two things 
+We require a platform which can do two things 
 \begin{itemize}
 \item High speed -Digital signal processing  
-\item Uppper level tasks - packet forming, Time stamping, ethernet communication
+\item Upper level tasks - packet forming, Time stamping, ethernet communication
 \end{itemize}
-Hence an asymmatric dual core processor - DSP + ARM
+Hence an asymmetric dual core processor - DSP + ARM
 \begin{itemize}
 \item OMAPM L-137 or L-138 (C6747 DSP + ARM 926EJ)
 \item Hawk-Board V/s Omap-L137 Evaluation Module
@@ -278,28 +278,27 @@ Hence an asymmatric dual core processor - DSP + ARM
 \end{frame}
 
 %====================
-\begin{frame}{PMU Architecture - Platform}
-\begin{figure}
-\includegraphics[scale=0.39]{fig/hwkbrd.jpg}
-\end{figure}
-\end{frame}
+%\begin{frame}{PMU Architecture - Platform}
+%\begin{figure}
+%\includegraphics[scale=0.39]{fig/hwkbrd.jpg}
+%\end{figure}
+%\end{frame}
 
 %==========================
 
 \begin{frame}{PMU Architecture - OMAP L137 EVM}
 \begin{figure}
 \includegraphics[width=\textwidth]{fig/omapl137-evm-board.jpg}
-\caption{ OMAP- L137 EVM }
 \end{figure}
 \end{frame}
 
 %=======================
-\begin{frame}{PMU Architecture - OMAP L137 EVM}
-\begin{figure}
-\includegraphics[width=\textwidth]{fig/OMAP_L137EVM.png}
-\caption{Block Diagram of EVM \cite{site:evm}}
-\end{figure}
-\end{frame}
+%\begin{frame}{PMU Architecture - OMAP L137 EVM}
+%\begin{figure}
+%\includegraphics[width=\textwidth]{fig/OMAP_L137EVM.png}
+%\caption{Block Diagram of EVM \cite{site:evm}}
+%\end{figure}
+%\end{frame}
 
 %=================
 \begin{frame}{PMU Architecture - ADC Board}
@@ -316,7 +315,7 @@ For sensing supply inputs we require ADCs which should have:
 \begin{frame}{PMU Architecture - ADC Board}
 
 \begin{itemize}
-\item Out several options we nerrowed down on \textbf{AD7606} or \textbf{AD7864}
+\item Out of several options we have narrowed down to \textbf{AD7606} or \textbf{AD7864}
 \item AD7864 was choosen has following specification
 \begin{itemize}
 	\item[-] High speed (1.65 $\mu$s) 12-bit ADC 
@@ -357,7 +356,6 @@ EMIF-A controller is a 16-bit databus based versatile controller \cite{uguide:em
 \begin{frame}{PMU Architecture - ADC board Arrangement}
 \begin{figure}
 \includegraphics[scale= 0.4]{fig/ADC_board.png}
-\caption{ADC Board block diagram}
 \end{figure}
 \end{frame}
 
