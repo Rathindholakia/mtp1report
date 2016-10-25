@@ -10,8 +10,8 @@
 \usepackage{animate}
 
 
-\title{ Hardware-In-Loop Testing of Phasor Measurement Unit using Mini-Full Spectrum Simulator}
-\date{\today}
+\title{ Hardware-In-Loop Testing of Phasor Measurement Unit using Miniature Full Spectrum Simulator}
+\date{Oct 27, 2016}
 \author{Rathin Dholakia \\Guided By:\\ Prof. M. C. Chandorkar}
 \institute{MTP Stage - 1}
 \begin{document}
@@ -36,7 +36,7 @@
  \begin{frame}{Aim of Project}
   \begin{itemize}
   \item \textbf{Test the feasibility of using Full Spectrum Simulator (FSS) as a test bench for PMU testing}
-  \item \textbf{Test PMU device compliance as per IEEE C37.118 PMU standard}
+  \item \textbf{Test PMU device compliance as per IEEE C37.118.1 standard}
   \end{itemize}
 
  \begin{figure}
@@ -56,8 +56,8 @@
  %===================================
  
    %---- SLIDE - 3  ================
-     \begin{frame}{Backgorund - Terms}
-   	 \textbf{C37.118} It is a PMU standard stating the measurement provisions, performance criterion and data communication protocol.
+     \begin{frame}{Background - Terms}
+   	 \textbf{C37.118} It is a synchrophasor standard stating the measurement provisions, performance criterion and data communication protocol.
    	 \begin{center}
 		\begin{itemize}
 		\item \textbf{Phasors:} A complex number which represents both magnitude and phase of an AC quantity.
@@ -75,7 +75,7 @@
  
    %---- Slide - 4 ---------------
    \begin{frame}{Background - PMU Basics}
-   PMU: It is a device which gives you an estimate of the phasor 
+   \textbf{PMU:} It is a device which gives you an estimate of the phasor 
    \begin{figure}
    \includegraphics*[scale = 0.2]{Circle-To-Sine-Wave.png}
    \caption{Sine to Circle representation \cite{site:westau}}
@@ -207,7 +207,7 @@ Test under C37.118.1a-2014"}}
 \begin{itemize}
 	\item PSCAD/EMTDC generates precise current and voltage signals
 	\item Power System Sim. plays it in realtime
-	\item Test signals are time Synchronised
+	\item Test signals are time synchronised
 	\item The M class operating range is considered, as P class is subset of M. 
 \end{itemize}
 \end{itemize}
@@ -232,17 +232,18 @@ Test under C37.118.1a-2014"}}
 \begin{column}{0.5\textwidth}
 \begin{figure}
 \includegraphics[width=\columnwidth]{fig/fss_arch2.png}
-\caption{FSS Archicture}
+\caption{FSS Architecture}
 \end{figure}
 \end{column}
 \begin{column}{0.5\textwidth}
 \begin{itemize}
-\item Card Based structure
+\item Card Based Structure
 \item System Interface Card (SIC)
 \item Intra Rack Control Card (IRC Card)
 \item Three CPU Cards, each having 3 DSPs. So total 9 processors
-\item One Analog I/O Card
-\item Digital I/O card 
+\item One Analog Input Card ($\pm 10$ V)
+\item One Analog Output Card ($\pm 10$ V)
+\item Digital I/O Card ($0-5$ V)
 \end{itemize}
 \end{column}
 \end{columns}
@@ -339,17 +340,18 @@ EMIF-A controller is a 16-bit databus based versatile controller \cite{uguide:em
 	\item Single Data Rate (SDR) RAM
 	\item Asynchronous devices like NAND \& NOR flash memory and SRAM
 	\end{itemize}
-	lot of features to ease and facilitate the usage of asynchronous devices
+	
 	\end{column}
 
 \begin{column}{0.5\textwidth}
 	\begin{figure}
 	\includegraphics[width=\columnwidth]{fig/EMIFA.png}
-	\caption{EMIFA Block Diagram \cite{uguide:emifa} }
+	\caption{EMIFA Block Diagram }
 	\label{fig:EMIFA}
 	\end{figure}
 \end{column}
 \end{columns}
+Lot of features to ease and facilitate the usage of asynchronous devices
 \end{frame}
 
 %==============================================
